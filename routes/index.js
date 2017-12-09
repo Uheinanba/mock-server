@@ -9,7 +9,7 @@ var data = Mock.mock({
     },
   ],
 });
-console.log(JSON.stringify(data, null, 4));
+// console.log(JSON.stringify(data, null, 4));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
