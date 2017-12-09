@@ -3,7 +3,11 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
- body {
+html,body{
+  margin: 0;
+  padding: 0
+}
+body {
   background-color: #f8f8f8;
 }
 #wrapper {
@@ -104,7 +108,7 @@
     z-index: 1;
     position: absolute;
     width: 250px;
-    margin-top: 51px;
+    margin-top: 56px;
   }
   .navbar-top-links .dropdown-messages,
   .navbar-top-links .dropdown-tasks,

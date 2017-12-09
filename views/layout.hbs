@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href='/stylesheets/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     {{{body}}}
@@ -23,7 +23,7 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-envelope fa-fw">aaa</i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
@@ -74,7 +74,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-tasks fa-fw">bbbb</i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
                         <li>
@@ -153,7 +153,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-bell fa-fw">ccc</i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
@@ -213,7 +213,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw">ddd</i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -265,12 +265,22 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
     </div>
   </body>
   <script src="/javascripts/jquery.js"></script>
   <script src="/javascripts/bootstrap.min.js"></script>
+  <script src="/dist/index.js"></script>
   <script>
-    $(function() {
+    {{!-- $(function() {
         $('#side-menu').metisMenu();
     });
 
@@ -311,6 +321,6 @@
                 break;
             }
         }
-    });
+    }); --}}
   </script>
 </html>
