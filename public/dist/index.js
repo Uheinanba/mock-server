@@ -65,7 +65,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({5:[function(require,module,exports) {
+})({8:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -96,7 +96,7 @@ function getBaseURL(url) {
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 
-},{}],4:[function(require,module,exports) {
+},{}],7:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -128,13 +128,13 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-},{"./bundle-url":5}],3:[function(require,module,exports) {
+},{"./bundle-url":8}],5:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":4}],2:[function(require,module,exports) {
+},{"_css_loader":7}],6:[function(require,module,exports) {
 const Util = (($) => {
   let transition = false;
 
@@ -497,7 +497,7 @@ const MetisMenu = (($) => {
 
 })(jQuery);
 
-},{}],6:[function(require,module,exports) {
+},{}],3:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -513,7 +513,7 @@ require("metisMenu/src/metisMenu.css");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _metisMenu2.default;
-},{"metisMenu/src/metisMenu.css":3,"metisMenu/src/metisMenu":2}],1:[function(require,module,exports) {
+},{"metisMenu/src/metisMenu.css":5,"metisMenu/src/metisMenu":6}],1:[function(require,module,exports) {
 "use strict";
 
 var _metisMenu = require("./components/metisMenu");
@@ -524,7 +524,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 $('#side-menu').metisMenu();
 console.log(222, _metisMenu2.default);
-},{"./components/metisMenu":6}],0:[function(require,module,exports) {
+},{"./components/metisMenu":3}],0:[function(require,module,exports) {
 var global = (1,eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -542,7 +542,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent) {
-  var ws = new WebSocket('ws://localhost:53482/');
+  var ws = new WebSocket('ws://localhost:56393/');
   ws.onmessage = (e) => {
     var data = JSON.parse(e.data);
 
