@@ -65,76 +65,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({8:[function(require,module,exports) {
-var bundleURL = null;
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error;
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^\)\n]+/g);
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^\/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-
-},{}],7:[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-  newLink.onload = function () {
-    link.remove();
-  };
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-};
-
-module.exports = reloadCSS;
-
-},{"./bundle-url":8}],5:[function(require,module,exports) {
-
-        var reloadCSS = require('_css_loader');
-        module.hot.dispose(reloadCSS);
-        module.hot.accept(reloadCSS);
-      
-},{"_css_loader":7}],6:[function(require,module,exports) {
+})({9:[function(require,module,exports) {
 const Util = (($) => {
   let transition = false;
 
@@ -497,7 +428,76 @@ const MetisMenu = (($) => {
 
 })(jQuery);
 
-},{}],3:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error;
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^\)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^\/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+
+},{}],11:[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+};
+
+module.exports = reloadCSS;
+
+},{"./bundle-url":12}],10:[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+},{"_css_loader":11}],8:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -513,18 +513,80 @@ require("metisMenu/src/metisMenu.css");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _metisMenu2.default;
-},{"metisMenu/src/metisMenu.css":5,"metisMenu/src/metisMenu":6}],1:[function(require,module,exports) {
+},{"metisMenu/src/metisMenu":9,"metisMenu/src/metisMenu.css":10}],7:[function(require,module,exports) {
 "use strict";
 
-var _metisMenu = require("./components/metisMenu");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _metisMenu = require("../components/metisMenu");
 
 var _metisMenu2 = _interopRequireDefault(_metisMenu);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-$('#side-menu').metisMenu();
-console.log(222, _metisMenu2.default);
-},{"./components/metisMenu":3}],0:[function(require,module,exports) {
+var initMetisMenu = function initMetisMenu() {
+  $('#side-menu').metisMenu();
+};
+
+//Loads the correct sidebar on window load,
+//collapses the sidebar on window resize.
+// Sets the min-height of #page-wrapper to window size
+var windowLoaded = function windowLoaded() {
+  $(window).on('load', function () {
+    var topOffset = 50;
+    var width = this.window.innerWidth > 0 ? this.window.innerWidth : this.screen.width;
+    if (width < 768) {
+      $('div.navbar-collapse').addClass('collapse');
+      topOffset = 100; // 2-row-menu
+    } else {
+      $('div.navbar-collapse').removeClass('collapse');
+    }
+
+    var height = (this.window.innerHeight > 0 ? this.window.innerHeight : this.screen.height) - 1;
+    height = height - topOffset;
+    if (height < 1) height = 1;
+    if (height > topOffset) {
+      $('#page-wrapper').css('min-height', height + 'px');
+    }
+  });
+};
+
+var initNav = function initNav() {
+  var url = window.location;
+  // var element = $('ul.nav a').filter(function() {
+  //     return this.href == url;
+  // }).addClass('active').parent().parent().addClass('in').parent();
+  var element = $('ul.nav a').filter(function () {
+    return this.href == url;
+  }).addClass('active').parent();
+
+  while (true) {
+    if (element.is('li')) {
+      element = element.parent().addClass('in').parent();
+    } else {
+      break;
+    }
+  }
+};
+
+exports.default = function () {
+  windowLoaded();
+  initMetisMenu();
+  initNav();
+};
+},{"../components/metisMenu":8}],1:[function(require,module,exports) {
+"use strict";
+
+var _init = require("./core/init");
+
+var _init2 = _interopRequireDefault(_init);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _init2.default)();
+},{"./core/init":7}],0:[function(require,module,exports) {
 var global = (1,eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -542,7 +604,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent) {
-  var ws = new WebSocket('ws://localhost:56393/');
+  var ws = new WebSocket('ws://localhost:55866/');
   ws.onmessage = (e) => {
     var data = JSON.parse(e.data);
 
