@@ -6,5 +6,13 @@
  * errMsg: 错误信息
  * data: 返回数据
  
-3. todo:
-http://bootstrap-table.wenzhixin.net.cn/zh-cn/
+3. 数据库:
+  create table fs-mock
+	（
+		id int unsigned not null auto_increment primary key,
+		type enum(8) not null,
+		sex char(4) not null,
+		age tinyint unsigned not null,
+		tel char(13) null default "-"
+	);
+4. todo:
