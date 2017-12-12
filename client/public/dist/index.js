@@ -65,7 +65,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({10:[function(require,module,exports) {
+})({7:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -96,7 +96,7 @@ function getBaseURL(url) {
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 
-},{}],9:[function(require,module,exports) {
+},{}],6:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -128,13 +128,13 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-},{"./bundle-url":10}],7:[function(require,module,exports) {
+},{"./bundle-url":7}],4:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":9}],8:[function(require,module,exports) {
+},{"_css_loader":6}],5:[function(require,module,exports) {
 const Util = (($) => {
   let transition = false;
 
@@ -497,7 +497,7 @@ const MetisMenu = (($) => {
 
 })(jQuery);
 
-},{}],5:[function(require,module,exports) {
+},{}],3:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -513,7 +513,7 @@ require("metisMenu/src/metisMenu.css");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _metisMenu2.default;
-},{"metisMenu/src/metisMenu.css":7,"metisMenu/src/metisMenu":8}],3:[function(require,module,exports) {
+},{"metisMenu/src/metisMenu.css":4,"metisMenu/src/metisMenu":5}],2:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -576,7 +576,7 @@ exports.default = function () {
   initMetisMenu();
   initNav();
 };
-},{"../components/metisMenu":5}],1:[function(require,module,exports) {
+},{"../components/metisMenu":3}],1:[function(require,module,exports) {
 "use strict";
 
 var _init = require("./core/init");
@@ -586,8 +586,8 @@ var _init2 = _interopRequireDefault(_init);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _init2.default)();
-},{"./core/init":3}],0:[function(require,module,exports) {
-var global = (1,eval)('this');
+},{"./core/init":2}],0:[function(require,module,exports) {
+var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
   OldModule.call(this);
@@ -604,20 +604,24 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent) {
-  var ws = new WebSocket('ws://localhost:63129/');
-  ws.onmessage = (e) => {
-    var data = JSON.parse(e.data);
+  var ws = new WebSocket('ws://localhost:58258/');
+  ws.onmessage = function(event) {
+    var data = JSON.parse(event.data);
 
     if (data.type === 'update') {
-      for (let asset of data.assets) {
+      data.assets.forEach(function (asset) {
         hmrApply(global.require, asset);
-      }
+      });
 
-      for (let asset of data.assets) {
+      data.assets.forEach(function (asset) {
         if (!asset.isNew) {
           hmrAccept(global.require, asset.id);
         }
-      }
+      });
+    }
+
+    if (data.type === 'reload') {
+      window.location.reload();
     }
 
     if (data.type === 'error-resolved') {
@@ -636,10 +640,12 @@ function getParents(bundle, id) {
     return [];
   }
 
-  let parents = [];
-  for (let k in modules) {
-    for (let d in modules[k][1]) {
-      let dep = modules[k][1][d];
+  var parents = [];
+  var k, d, dep;
+
+  for (k in modules) {
+    for (d in modules[k][1]) {
+      dep = modules[k][1][d];
       if (dep === id || (Array.isArray(dep) && dep[dep.length - 1] === id)) {
         parents.push(+k);
       }
@@ -660,7 +666,7 @@ function hmrApply(bundle, asset) {
   }
 
   if (modules[asset.id] || !bundle.parent) {
-    let fn = new Function('require', 'module', 'exports', asset.generated.js);
+    var fn = new Function('require', 'module', 'exports', asset.generated.js);
     asset.isNew = !modules[asset.id];
     modules[asset.id] = [fn, asset.deps];
   } else if (bundle.parent) {
@@ -678,7 +684,7 @@ function hmrAccept(bundle, id) {
     return hmrAccept(bundle.parent, id);
   }
 
-  let cached = bundle.cache[id];
+  var cached = bundle.cache[id];
   if (cached && cached.hot._disposeCallback) {
     cached.hot._disposeCallback();
   }
@@ -692,6 +698,8 @@ function hmrAccept(bundle, id) {
     return true;
   }
 
-  return getParents(global.require, id).some(id => hmrAccept(global.require, id));
+  return getParents(global.require, id).some(function (id) {
+    return hmrAccept(global.require, id)
+  });
 }
 },{}]},{},[0,1])

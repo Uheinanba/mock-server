@@ -1,6 +1,7 @@
 // dao/userDao.js
 // 实现与MySQL交互
-const pool = require('../module/pool');
+const $sql = require('./userSqlMapping');
+const pool = require('../util/pool');
 
 // 向前台返回JSON方法的简单封装
 const jsonWrite = function(res, ret) {

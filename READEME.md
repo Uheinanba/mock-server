@@ -1,7 +1,11 @@
 ### 技术清单
 1. 打包工具: parceljs, [中文地址](https://parceljs.docschina.org/),[英文地址](https://parceljs.org/)
 
-2. 返回状态码约定:
+2. 数据库mysql
+
+3. orm: sequelizejs
+
+### 返回状态码约定:
  * errCode: 错误码
  * errMsg: 错误信息
  * data: 返回数据
