@@ -1,7 +1,5 @@
 // dao/userDao.js
 // 实现与MySQL交互
-const mysql = require('mysql');
-const _ = require('lodash');
 const pool = require('../module/pool');
 
 // 向前台返回JSON方法的简单封装

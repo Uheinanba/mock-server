@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "parcel watch ./public/src/index -d ./public/dist",
+    "dev": "parcel watch ./client/public/src/index -d ./client/public/dist",
     "start": "nodemon ./bin/www & npm run dev"
   },
   "dependencies": {
