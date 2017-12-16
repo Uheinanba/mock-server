@@ -3,12 +3,14 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  models.User.findAll({
-    include: [models.Task],
-  }).then(function(users) {
+  models.app_mock.findAll().then(mocks => {
+    const resMocks = mocks.map(item => ({
+      name: item.name,
+      type: item.type,
+      mock: item.data,
+    }));
     res.render('index', {
-      title: 'Sequelize: Express Example',
-      users: users,
+      mocks: resMocks,
     });
   });
 });
