@@ -1,19 +1,20 @@
-<div class="row app-operate">
+<div class="row app-operate j-panel-common_data">
     <form class="form-horizontal">
         <div class="form-group">
             <label class="col-sm-2 control-label">错误码</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" value="errorCode">
+                <input type="text" name="errorCodeKey" class="form-control" value="errorCode" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">错误信息</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" value="errorMsg">
+                <input type="text" name="errorMsgKey" class="form-control" value="errorMsg" />
             </div>
         </div>
     </form>
 </div>
+
 <div class="panel panel-default">
     <!-- /.panel-heading -->
     <div class="panel-body">
@@ -109,7 +110,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">method</label>
                         <div class="col-sm-10">
-                            <select class="form-control">
+                            <select class="form-control" name="method">
                                 <option>POST</option>
                                 <option>GET</option>
                             </select>
@@ -118,7 +119,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">类别</label>
                         <div class="col-sm-10">
-                            <select class="form-control">
+                            <select class="form-control" name="type">
                                 <option>FCP</option>
                                 <option>HTTP</option>
                             </select>
@@ -127,38 +128,38 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">描述</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="接口描述"/>
+                            <input type="text" name="description" class="form-control" placeholder="接口描述"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">地址</label>
+                        <label class="col-sm-2 control-label">路径</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="接口全路径"/>
+                            <input type="text" name="url" class="form-control" placeholder="接口全路径"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">错误码</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" value="0"/>
+                            <input type="text" name="errCode" class="form-control" value="0"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">错误信息</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" value="成功"/>
+                            <input type="text" name="errMsg" class="form-control" value="成功"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword" class="col-sm-2 control-label">数据</label>
                         <div class="col-sm-10">
-                            <textarea type="text" class="form-control" rows="6"></textarea>
+                            <textarea type="text" name="data" class="form-control" rows="6"></textarea>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary j-btn-form__sure">确定</button>
             </div>
             </div>
         </div>
