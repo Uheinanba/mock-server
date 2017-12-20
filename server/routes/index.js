@@ -15,4 +15,9 @@ router.get('/', function(req, res) {
   });
 });
 
+// 新建页面
+router.get('/create', function(req, res) {
+  res.render('create');
+});
+
 module.exports = router;

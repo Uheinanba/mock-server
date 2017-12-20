@@ -1,9 +1,3 @@
-import metisMenu from '../components/metisMenu';
-
-const initMetisMenu = () => {
-  $('#side-menu').metisMenu();
-};
-
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
@@ -57,6 +51,6 @@ const initNav = () => {
 
 export default () => {
   windowLoaded();
-  initMetisMenu();
-  initNav();
+  // initMetisMenu();
+  // initNav();
 };
