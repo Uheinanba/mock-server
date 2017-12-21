@@ -1,7 +1,8 @@
 export const SETTING_FILEDS = [
+  'name',
   'method',
   'type',
-  'delay',
+  'time',
   'desc',
   'errCode',
   'errMsg',

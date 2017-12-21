@@ -8,7 +8,11 @@
     <div class="tab-content j-create__tab-content">
       <form id="basicSetting" class="tab-pane active" role="tabpanel">
         <div class="form-group">
-          <label>Method</label>
+          <label>接口名</label>
+          <input type="text" name="name" class="form-control" placeholder="请输入接口全路径"/>
+        </div>
+        <div class="form-group">
+          <label>method</label>
           <select class="form-control" name="method">
             <option>get</option>
             <option>post</option>
@@ -22,6 +26,12 @@
           </select>
         </div>
         <div class="form-group">
+          <label>描述</label>
+          <input type="text" name="desc" class="form-control" placeholder="接口描述"/>
+        </div>
+      </form>
+      <form id="otherSetting" class="tab-pane" role="tabpanel">
+        <div class="form-group">
           <label>错误码</label>
           <input type="text" name="errCode" class="form-control" value="0"/>
         </div>
@@ -30,14 +40,8 @@
           <input type="text" name="errMsg" class="form-control" value="成功"/>
         </div>
         <div class="form-group">
-          <label>描述</label>
-          <input type="text" name="desc" class="form-control" placeholder="接口描述"/>
-        </div>
-      </form>
-      <form id="otherSetting" class="tab-pane" role="tabpanel">
-        <div class="form-group">
-          <label>delay</label>
-          <input type="text" name="delay" class="form-control" value="200"/>
+          <label>接口耗时</label>
+          <input type="text" name="time" class="form-control" value="200"/>
         </div>
         <div class="form-group">
           <label>错误码Key值</label>
