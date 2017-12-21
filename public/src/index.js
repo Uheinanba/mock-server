@@ -1,10 +1,14 @@
-import _ from 'lodash';
-
 import bootstrap from './core/init';
 import { getValsByNames } from './core/utils';
 import './style/index.less';
 import Mocks from './mocks';
 import Events from './events';
+
+toastr.options = {
+  closeButton: true,
+  progressBar: true,
+  timeOut: '3500',
+};
 
 class Index {
   constructor() {

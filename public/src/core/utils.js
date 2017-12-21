@@ -4,5 +4,10 @@ export const getValsByNames = ($el, names) => {
     tmp[name] = $el.find(`[name='${name}']`).val();
   });
   return tmp;
-  tmp = null;
+};
+
+export const setValsByNames = ($el, names, values) => {
+  names.forEach(name => {
+    $el.find(`[name='${name}']`).val(values[name]);
+  });
 };
