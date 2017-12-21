@@ -1,6 +1,54 @@
 <div class="editor-wrap">
   <div id="ace-editor"></div>
-  <div class="m-editor__panel"></div>
+  <div class="well well-lg m-create__well">
+    <ul class="nav nav-tabs nav-justified j-create__nav-tabs">
+      <li role="presentation" class="active"><a href="#basicSetting">基本设置</a></li>
+      <li role="presentation"><a href="#otherSetting">其他设置</a></li>
+    </ul>
+    <div class="tab-content j-create__tab-content">
+      <form id="basicSetting" class="tab-pane active" role="tabpanel">
+        <div class="form-group">
+          <label>Method</label>
+          <select class="form-control" name="method">
+            <option>get</option>
+            <option>post</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>type</label>
+          <select class="form-control" name="type">
+            <option>fcp</option>
+            <option>http</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>delay</label>
+          <input type="text" name="delay" class="form-control" value="200"/>
+        </div>
+        <div class="form-group">
+          <label>错误码</label>
+          <input type="text" name="errCode" class="form-control" value="0"/>
+        </div>
+        <div class="form-group">
+          <label>错误信息</label>
+          <input type="text" name="errMsg" class="form-control" value="成功"/>
+        </div>
+        <div class="form-group">
+          <label>描述</label>
+          <input type="text" name="desc" class="form-control" placeholder="接口描述"/>
+        </div>
+      </form>
+      <form id="otherSetting" class="tab-pane" role="tabpanel">
+        <div class="form-group">
+          <label>错误码Key值</label>
+          <input type="text" name="errCodeKey" class="form-control" value="errCode"/>
+        </div>
+        <div class="form-group">
+          <label>错误信息Key值</label>
+          <input type="text" name="errMsgKey" class="form-control" value="errMsg"/>
+        </div>
+      </form>
+  </div>
 </div>
 <script src="/javascripts/ace/ace.js"></script>
 <script src="/javascripts/ace/ext-settings_menu.js"></script>
