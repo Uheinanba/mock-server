@@ -1,7 +1,7 @@
 import store from './core/store';
-import { SETTING_FILEDS, SETTING_FCP_TYPE } from './config';
 import { setInitMockData } from './core/help';
-import { getValsByNames, setValsByNames } from './core/utils';
+import { SETTING_FILEDS, SETTING_FCP_TYPE } from './config';
+import { setValsByNames } from './core/utils';
 
 export default class {
   constructor() {
@@ -11,17 +11,13 @@ export default class {
   }
 
   initData() {
-    this.editor = ace.edit('ace-editor');
+    this.editor = window.ace && window.ace.edit('ace-editor');
     this.$tabContent = $('.j-create__tab-content');
     this.validSettings = {}; //  保存正确的数据
   }
 
   listenSettingChange() {
-    this.getInitMockData(getValsByNames(this.$tabContent, SETTING_FILEDS));
-    store.on('setting-change', res => {
-      this.getInitMockData(getValsByNames(this.$tabContent, SETTING_FILEDS));
-      console.log(res);
-    });
+    store.on('setting-change', res => this.getInitMockData(res));
   }
 
   getInitMockData(settings) {
@@ -42,6 +38,7 @@ export default class {
 
   initAceEditor() {
     const editor = this.editor;
+    if (!editor) return;
     document.getElementById('ace-editor').style.fontSize = '16px';
     ace.require('ace/ext/settings_menu').init(editor);
     editor.setTheme('ace/theme/twilight');

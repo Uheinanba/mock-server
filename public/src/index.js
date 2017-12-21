@@ -14,9 +14,10 @@ class Index {
   constructor() {
     bootstrap();
     this.$el = $('#app');
+    this.mocks = new Mocks();
+
     this.initElement();
     this.bindEvents();
-    this.mocks = new Mocks();
   }
 
   initElement() {
