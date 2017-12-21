@@ -2,7 +2,12 @@ var models = require('../models');
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res) {
+router.post('/mocks', function(req, res) {
+  const body = req.body;
+  console.log(body);
+  res.json({
+    success: 'true',
+  });
   /* models.app_mock.findAll().then(mocks => {
     const resMocks = mocks.map(item => ({
       name: item.name,

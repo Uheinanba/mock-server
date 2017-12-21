@@ -4,14 +4,16 @@ import { SETTING_FILEDS, SETTING_FCP_TYPE } from './config';
 import { setValsByNames } from './core/utils';
 
 export default class {
-  constructor() {
+  constructor(ctx) {
+    this.ctx = ctx;
     this.initData();
     this.initAceEditor();
     this.listenSettingChange();
+    // this.editor.getSession().on('change', function() {});
   }
 
   initData() {
-    this.editor = window.ace && window.ace.edit('ace-editor');
+    this.editor = this.ctx.editor;
     this.$tabContent = $('.j-create__tab-content');
     this.validSettings = {}; //  保存正确的数据
   }
@@ -23,6 +25,7 @@ export default class {
   getInitMockData(settings) {
     const { type, errCodeKey, errMsgKey, errCode, errMsg } = settings;
     try {
+      // 设置aec 编辑器中数据
       let mockData = setInitMockData(
         type === 'fcp',
         settings,
@@ -31,6 +34,7 @@ export default class {
       this.editor.setValue(JSON.stringify(mockData, null, '\t'));
       this.validSettings = settings;
     } catch (e) {
+      // 重新设置setting 面板中的数据
       setValsByNames(this.$tabContent, SETTING_FILEDS, this.validSettings);
       toastr.error('输入参数不是有效的JSON格式', '调用失败');
     }

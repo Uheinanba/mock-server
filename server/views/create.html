@@ -22,10 +22,6 @@
           </select>
         </div>
         <div class="form-group">
-          <label>delay</label>
-          <input type="text" name="delay" class="form-control" value="200"/>
-        </div>
-        <div class="form-group">
           <label>错误码</label>
           <input type="text" name="errCode" class="form-control" value="0"/>
         </div>
@@ -40,6 +36,10 @@
       </form>
       <form id="otherSetting" class="tab-pane" role="tabpanel">
         <div class="form-group">
+          <label>delay</label>
+          <input type="text" name="delay" class="form-control" value="200"/>
+        </div>
+        <div class="form-group">
           <label>错误码Key值</label>
           <input type="text" name="errCodeKey" class="form-control" value="errCode"/>
         </div>
@@ -48,6 +48,8 @@
           <input type="text" name="errMsgKey" class="form-control" value="errMsg"/>
         </div>
       </form>
+    </div>
+    <button type="submit" class="j-create__submit submit-btn btn btn-primary"> 提交 </button>
   </div>
 </div>
 

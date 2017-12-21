@@ -1,5 +1,4 @@
 import bootstrap from './core/init';
-import { getValsByNames } from './core/utils';
 import './style/index.less';
 import Mocks from './mocks';
 import Events from './events';
@@ -14,13 +13,13 @@ class Index {
   constructor() {
     bootstrap();
     this.$el = $('#app');
-    this.mocks = new Mocks();
-
-    this.initElement();
+    this.initData();
+    this.mocks = new Mocks(this);
     this.bindEvents();
   }
 
-  initElement() {
+  initData() {
+    this.editor = window.ace && window.ace.edit('ace-editor');
     this.$modalForm = this.$el.find('.j-mock-form__modal');
   }
 
