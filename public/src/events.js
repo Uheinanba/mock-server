@@ -29,20 +29,23 @@ export default class Events {
         } catch (e) {
           return toastr.error('输入参数不是有效的JSON格式', '调用失败');
         }
-
         console.log(_.extend({}, this.settingVals, { mockVo }));
         $.ajax({
           url: '/api/createMock',
           type: 'POST',
-          data: _.extend(
-            { mockVo },
-            _.pick(this.settingVals, [
-              'name',
-              'type',
-              'method',
-              'desc',
-              'time',
-            ]),
+          contentType: 'application/json; charset=utf-8',
+          dataType: 'json',
+          data: JSON.stringify(
+            _.extend(
+              { mockVo },
+              _.pick(this.settingVals, [
+                'name',
+                'type',
+                'method',
+                'desc',
+                'time',
+              ]),
+            ),
           ),
         });
       },

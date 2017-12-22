@@ -26,31 +26,18 @@ const windowLoaded = () => {
 };
 
 const initNav = () => {
-  var url = window.location;
-  // var element = $('ul.nav a').filter(function() {
-  //     return this.href == url;
-  // }).addClass('active').parent().parent().addClass('in').parent();
-  var element = $('ul.nav a')
+  const url = window.location;
+  let element = $('ul.nav a')
     .filter(function() {
       return this.href == url;
     })
+    .parent()
     .addClass('active')
-    .parent();
-
-  while (true) {
-    if (element.is('li')) {
-      element = element
-        .parent()
-        .addClass('in')
-        .parent();
-    } else {
-      break;
-    }
-  }
+    .siblings()
+    .removeClass('active');
 };
 
 export default () => {
   windowLoaded();
-  // initMetisMenu();
-  // initNav();
+  initNav();
 };

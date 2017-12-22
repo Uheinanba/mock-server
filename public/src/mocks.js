@@ -19,6 +19,7 @@ export default class {
   }
 
   listenSettingChange() {
+    if (!this.editor) return;
     store.on('setting-change', res => this.getInitMockData(res));
   }
 

@@ -1,23 +1,49 @@
-var models = require('../models');
-var express = require('express');
+const models = require('../models');
+const _ = require('lodash');
+const express = require('express');
 const { check, validationResult } = require('express-validator/check');
-var router = express.Router();
+const { sanitize, sanitizeBody } = require('express-validator/filter');
+
+const router = express.Router();
 
 const insertMockData = async data => {
+  console.log(data);
   const mocks = await models.app_mock.create(data);
-  console.log(mocks);
 };
 
 router.post(
   '/createMock',
-  [check('type').isIn(['fcp', 'http']), check('method').isIn(['post', 'get'])],
-  function(req, res) {
+  [
+    check('type').isIn(['fcp', 'http']),
+    check('method').isIn(['post', 'get']),
+    check('name').isLength({ min: 1 }),
+    check('time').isLength({ min: 2 }),
+    sanitizeBody('time').toInt(),
+  ],
+  (req, res) => {
     const body = req.body;
-    console.log(body);
-    // insertMockData(body);
-    res.json({
-      success: 'true',
-    });
+    try {
+      body.mockVo = JSON.stringify(body.mockVo);
+    } catch (e) {
+      return res.json({
+        errCode: -201,
+        errorMsg: 'mockVo 不是正确的json类型',
+        data: 0,
+      });
+    }
+
+    try {
+      validationResult(req).throw();
+    } catch (err) {
+      const errorObj = _.first(_.values(err.mapped()));
+      return res.json({
+        errCode: -201,
+        errorMsg: `${errorObj.msg}:${errorObj.param}`,
+        data: 0,
+      });
+    }
+
+    insertMockData(body);
     /* models.app_mock.findAll().then(mocks => {
     const resMocks = mocks.map(item => ({
       name: item.name,
