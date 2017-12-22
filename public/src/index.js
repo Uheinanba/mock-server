@@ -16,6 +16,15 @@ class Index {
     this.initData();
     this.mocks = new Mocks(this);
     this.bindEvents();
+
+    $('.j-create').on('click', () => {
+      $.ajax({
+        url: '/api/ceshi?demo=3234',
+        type: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+      });
+    });
   }
 
   initData() {

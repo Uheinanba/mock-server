@@ -1,16 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var hbs = require('hbs');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const _ = require('lodash');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const hbs = require('hbs');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var index = require('./server/routes/index');
-var api = require('./server/routes/api');
-var users = require('./server/routes/users');
+const models = require('./server/models');
 
-var app = express();
+const index = require('./server/routes/index');
+const api = require('./server/routes/api');
+// const users = require('./server/routes/users');
+
+const app = express();
 
 // view engine setup
 hbs.registerPartials(__dirname + '/server/views/partials');
@@ -28,12 +31,27 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/api', api);
-app.use('/users', users);
+app.use('/__api', api);
+
+app.use(function(req, res, next) {
+  /* models.app_mock.findAll(
+    { 
+      where: {name: req.path},
+      raw: true 
+    }
+  ) */
+  if (req.path === '/api/ceshi') {
+    models.app_mock.findAll({
+      where: { name: req.path },
+      raw: true,
+    });
+  }
+  next();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

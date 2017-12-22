@@ -7,11 +7,6 @@ const { sanitize, sanitizeBody } = require('express-validator/filter');
 
 const router = express.Router();
 
-const insertMockData = async data => {
-  console.log(data);
-  const mocks = await models.app_mock.create(data);
-};
-
 router.post(
   '/createMock',
   [
@@ -32,7 +27,6 @@ router.post(
         data: 0,
       });
     }
-
     try {
       validationResult(req).throw();
     } catch (err) {
@@ -43,24 +37,14 @@ router.post(
         data: 0,
       });
     }
-
-    insertMockData(body);
-    /* models.app_mock.findAll().then(mocks => {
-    const resMocks = mocks.map(item => ({
-      name: item.name,
-      type: item.type,
-      mock: item.data,
-    }));
-    res.render('index', {
-      mocks: resMocks,
-    });
-  }); */
+    models.app_mock.create(body).then(() =>
+      res.json({
+        errCode: 0,
+        errorMsg: 'mockVo 不是正确的json类型',
+        data: 1,
+      }),
+    );
   },
 );
-
-// 新建页面
-router.get('/create', function(req, res) {
-  res.render('create');
-});
 
 module.exports = router;

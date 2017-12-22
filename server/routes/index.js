@@ -1,11 +1,22 @@
-var models = require('../models');
-var express = require('express');
-var router = express.Router();
+const _ = require('lodash');
+const models = require('../models');
+const express = require('express');
+const router = express.Router();
 
 router.get('/', (req, res) => {
-  models.app_mock.findAll().then(mocks => {
+  models.app_mock.findAll({ raw: true }).then(mocks => {
     res.render('index', {
-      mocks: mocks,
+      mocks: _.map(mocks, items => {
+        for (const prop in items) {
+          if (prop === 'mockVo') {
+            items[prop] = _.trim(
+              JSON.stringify(JSON.parse(items[prop]), null, '\t'),
+            );
+            break;
+          }
+        }
+        return items;
+      }),
     });
   });
 });

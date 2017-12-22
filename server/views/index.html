@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-sm-6 op-add">
-                <button type="button" class="btn btn-primary j-btn__add"><i class="glyphicon glyphicon-plus"></i>新建</button>
+                <button type="button" class="btn btn-primary j-btn__add"><i class="glyphicon glyphicon-plus j-create"></i>新建</button>
             </div>
         </div>
         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -24,11 +24,18 @@
             </thead>
             <tbody>
                 {{#each mocks}}
-                    <tr>
+                    <tr data-toggle="collapse" role="button" href="#table-mocks__{{@index}}"  aria-controls="table-mocks__{{@index}}" aria-expanded="false">
                         <td>{{this.name}}</td>
                         <td>{{this.method}}</td>
                         <td>{{this.type}}</td>
                         <td class="center">{{this.time}}</td>
+                    </tr>
+                    <tr class="collapse" id="table-mocks__{{@index}}">
+                        <td colspan="4">
+                            <pre>
+                                {{this.mockVo}}
+                            </pre>
+                        </td>
                     </tr>
                 {{/each}}
             </tbody>

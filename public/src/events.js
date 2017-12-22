@@ -49,7 +49,7 @@ export default class Events {
 
   _handleSubmitMockData(mockVo) {
     $.ajax({
-      url: '/api/createMock',
+      url: '/__api/createMock',
       type: 'POST',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
