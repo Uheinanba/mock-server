@@ -1,7 +1,7 @@
 import { SETTING_FCP_TYPE, SETTING_HTTP_TYPE } from '../config';
 
 // 尝试修复编辑器的值
-const _fixAceEditorVal = val => val.replace(/\'/g, '"');
+export const fixAceEditorVal = val => val.replace(/\'/g, '"');
 
 /**
  * 将用户在ace编辑器中输入的值和 置面板设置的值 合并成一个有序的对象
@@ -13,7 +13,7 @@ const _fixAceEditorVal = val => val.replace(/\'/g, '"');
 export const setInitMockData = (isFcp, settings, editorVal) => {
   let _mockData = _.merge({}, isFcp ? SETTING_FCP_TYPE : SETTING_HTTP_TYPE);
   const { errCodeKey, errMsgKey, errCode, errMsg } = settings;
-  const editorData = JSON.parse(_fixAceEditorVal(editorVal));
+  const editorData = JSON.parse(fixAceEditorVal(editorVal));
   const getSetProp = prop => (isFcp ? `Value.${prop}` : `${prop}`);
   const data = _.merge(
     {},

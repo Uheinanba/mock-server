@@ -1,5 +1,6 @@
-const models = require('../models');
 const _ = require('lodash');
+const Mock = require('mockjs');
+const models = require('../models');
 const express = require('express');
 const { check, validationResult } = require('express-validator/check');
 const { sanitize, sanitizeBody } = require('express-validator/filter');
@@ -23,7 +24,7 @@ router.post(
   (req, res) => {
     const body = req.body;
     try {
-      body.mockVo = JSON.stringify(body.mockVo);
+      body.mockVo = JSON.stringify(Mock.mock(body.mockVo));
     } catch (e) {
       return res.json({
         errCode: -201,

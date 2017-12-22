@@ -37,7 +37,7 @@ export default class {
     } catch (e) {
       // 重新设置setting 面板中的数据
       setValsByNames(this.$tabContent, SETTING_FILEDS, this.validSettings);
-      toastr.error('输入参数不是有效的JSON格式', '调用失败');
+      toastr.error('编辑框中数据不是有效的JSON格式', '失败');
     }
   }
 
