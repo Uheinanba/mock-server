@@ -2,11 +2,11 @@
   <div id="ace-editor"></div>
   <div class="well well-lg m-create__well">
     <ul class="nav nav-tabs nav-justified j-create__nav-tabs">
-      <li role="presentation" class="active"><a href="#basicSetting">基本设置</a></li>
-      <li role="presentation"><a href="#otherSetting">其他设置</a></li>
+      <li role="presentation" class="active"><a href="#basicCreateSetting">基本设置</a></li>
+      <li role="presentation"><a href="#otherCreateSetting">其他设置</a></li>
     </ul>
     <div class="tab-content j-create__tab-content">
-      <form id="basicSetting" class="tab-pane active" role="tabpanel">
+      <form id="basicCreateSetting" class="tab-pane active" role="tabpanel">
         <div class="form-group">
           <label>接口名</label>
           <input type="text" name="name" class="form-control" placeholder="请输入接口全路径"/>
@@ -30,7 +30,8 @@
           <input type="text" name="desc" class="form-control" placeholder="接口描述"/>
         </div>
       </form>
-      <form id="otherSetting" class="tab-pane" role="tabpanel">
+      
+      <form id="otherCreateSetting" class="tab-pane" role="tabpanel">
         <div class="form-group">
           <label>错误码</label>
           <input type="text" name="errCode" class="form-control" value="0"/>
@@ -55,7 +56,7 @@
     </div>
     <div class="btn-group btn-group-justified" role="group">
       <div class="btn-group" role="group">
-        <button type="button" class="j-create__preview btn btn-primary"data-toggle="modal" data-target="#previeMockModal">预览</button>
+        <button type="button" class="j-create__preview btn btn-primary" data-toggle="modal" data-target="#previeMockModal">预览</button>
       </div>
       <div class="btn-group" role="group">
         <button type="button" class="j-create__submit btn btn-primary">提交</button>

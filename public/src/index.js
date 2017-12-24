@@ -29,7 +29,6 @@ class Index {
 
   initData() {
     this.editor = window.ace && window.ace.edit('ace-editor');
-    this.$modalForm = this.$el.find('.j-mock-form__modal');
   }
 
   bindEvents() {

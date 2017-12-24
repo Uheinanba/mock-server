@@ -44,6 +44,9 @@ export default class Events {
         }
         this._handleSubmitMockData(mockVo);
       },
+
+      // 新建类别
+      ['.j-btn__new-cate, click']: () => {},
     };
   }
 
