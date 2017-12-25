@@ -46,7 +46,7 @@ export default class Events {
       },
 
       // 新建类别
-      ['.j-btn__new-cate, click']: () => {},
+      /* ['.j-btn__new-cate, click']: () => {}, */
     };
   }
 

@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  models.app_mock.findAll({ raw: true }).then(mocks => {
+  models.appMock.findAll({ raw: true }).then(mocks => {
     res.render('index', {
-      mocks: _.map(mocks, items => {
+      /* mocks: _.map(mocks, items => {
         for (const prop in items) {
           if (prop === 'mockVo') {
             items[prop] = _.trim(
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
           }
         }
         return items;
-      }),
+      }), */
     });
   });
 });

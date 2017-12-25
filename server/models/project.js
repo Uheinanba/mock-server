@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const appProject = sequelize.define('app_project', {
+  const appProject = sequelize.define('appProject', {
     name: DataTypes.STRING,
     desc: DataTypes.STRING,
   });
