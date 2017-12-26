@@ -1,16 +1,21 @@
 <div class="container app-home">
   <div class="row">
-    <div class="col-md-4">
-        <div class="em-project__item">
-          <div>演示项目</div>
-          <div class="project-description">
-            已创建多种 Mock 类型，只需点击预览便可查看效果。亦可编辑，也可删除。
+    {{#each projects}}
+      <a class="col-md-4 app-home-nav" href="/mock/list">
+          <div class="em-project__item">
+            <div>{{this.name}}</div>
+            <div class="project-description">
+              {{this.desc}}
+            </div>
           </div>
-        </div>
-    </div>
+        </a>
+    {{/each}}
   </div>
 
-  <div class="em-add" style="bottom: 30px;" data-toggle="modal" data-target="#newProjectModal">
+  <div class="em-add"
+    data-toggle="modal"
+    style="bottom: 30px;"
+    data-target="#newProjectModal">
     <i class="glyphicon glyphicon-plus"></i>
   </div>
 
@@ -35,7 +40,7 @@
               </form>
           </div>
           <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-primary">确定</button>
+            <button type="button" data-dismiss="modal" class="j-btn__new-project btn btn-primary">确定</button>
           </div>
         </div>
       </div>

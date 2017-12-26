@@ -4,9 +4,15 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  models.appMock.findAll({ raw: true }).then(mocks => {
-    res.render('index', {
-      /* mocks: _.map(mocks, items => {
+  models.appProject
+    .findAll({
+      attributes: ['name', 'desc'],
+      raw: true,
+    })
+    .then(projects => {
+      res.render('index', {
+        projects,
+        /* mocks: _.map(mocks, items => {
         for (const prop in items) {
           if (prop === 'mockVo') {
             items[prop] = _.trim(
@@ -17,13 +23,13 @@ router.get('/', (req, res) => {
         }
         return items;
       }), */
+      });
     });
-  });
 });
 
 // 新建页面
-router.get('/create', function(req, res) {
-  res.render('create');
+router.get('/mock/list', function(req, res) {
+  res.render('list');
 });
 
 module.exports = router;

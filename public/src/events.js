@@ -2,12 +2,20 @@ import store from './core/store';
 import { SETTING_FILEDS } from './config';
 import { getValsByNames } from './core/utils';
 import { fixAceEditorVal } from './core/help';
+import fetch from './core/fetch';
 
 export default class Events {
   constructor(ctx) {
     this.ctx = ctx;
     this.$tabContent = $('.j-create__tab-content');
     store.trigger('setting-change', [this.getSettingVals()]);
+
+    $('#newProjectModal').on('hidden.bs.modal', function() {
+      $(this)
+        .find('form')
+        .get(0)
+        .reset();
+    });
     return this.bindEvents();
   }
   bindEvents() {
@@ -46,7 +54,19 @@ export default class Events {
       },
 
       // 新建类别
-      /* ['.j-btn__new-cate, click']: () => {}, */
+      ['.j-btn__new-project, click']: () => {
+        const { name, desc } = getValsByNames($('#newProjectModal'), [
+          'name',
+          'desc',
+        ]);
+        fetch({
+          url: '/__api/createProject',
+          data: { name, desc },
+          successMsg: '添加成功',
+        });
+      },
+
+      // ['.j-index__proj-item, click']: () => {},
     };
   }
 

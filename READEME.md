@@ -3,7 +3,7 @@
 
 2. 数据库mysql
 
-3. orm: sequelizejs
+3. orm: (sequelizejs)[https://segmentfault.com/a/1190000003987871]
 
 ### 返回状态码约定:
  * errCode: 错误码
