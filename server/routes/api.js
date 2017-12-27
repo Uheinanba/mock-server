@@ -52,17 +52,18 @@ router.post('/createMock', checkPostMockData, async (req, res) => {
   const postData = matchedData(req);
 
   // 查询是否有重复数据(保证同一project下的Url唯一)
-  const repeatMock = await appMock.findOne({
-    where: { appProjectId: postData.appProjectId, url: postData.url },
-  });
-  if (repeatMock) {
-    try {
+
+  try {
+    const repeatMock = await appMock.findOne({
+      where: { appProjectId: postData.appProjectId, url: postData.url },
+    });
+    if (repeatMock)
       return res.json(
         _.extend({}, ERRORS['unique'], { errMsg: 'url路径不能重复' }),
       );
-    } catch (e) {
-      return res.json(ERRORS['db']);
-    }
+  } catch (e) {
+    console.log(e);
+    return res.json(ERRORS['db']);
   }
 
   // 插入数据
@@ -70,6 +71,7 @@ router.post('/createMock', checkPostMockData, async (req, res) => {
     const created = await appMock.create(postData);
     res.json(SUCCESS_JSON);
   } catch (e) {
+    console.log(e);
     return res.json(ERRORS['db']);
   }
 });

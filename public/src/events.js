@@ -21,6 +21,10 @@ export default class Events {
     return this.bindEvents();
   }
   bindEvents() {
+    _.extend({}, this.bindCreatePageEvents(), this.bindIndexPageEvents());
+  }
+
+  bindCreatePageEvents() {
     return {
       // create 页面 tab切换
       ['.j-create__nav-tabs a, click'](e) {
@@ -28,8 +32,9 @@ export default class Events {
         $(this).tab('show');
       },
 
-      ['.j-create__tab-content select, change']: () =>
-        this._handleSettingChange(),
+      ['.j-create__tab-content select, change']: () => {
+        this._handleSettingChange();
+      },
 
       ['.j-create__tab-content input, blur']: () => this._handleSettingChange(),
 
@@ -54,7 +59,11 @@ export default class Events {
         }
         this._handleSubmitMockData(mockVo);
       },
+    };
+  }
 
+  bindIndexPageEvents() {
+    return {
       // 新建类别
       ['.j-btn__new-project, click']: () => {
         const { name, desc } = getValsByNames($('#newProjectModal'), [
@@ -67,8 +76,6 @@ export default class Events {
           successMsg: '添加成功',
         });
       },
-
-      // ['.j-index__proj-item, click']: () => {},
     };
   }
 

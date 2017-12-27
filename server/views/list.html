@@ -22,18 +22,18 @@
             <thead>
                 <tr>
                     <th>url</th>
-                    <th>method</th>
                     <th>type</th>
                     <th>耗时</th>
+                    <th>描述</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each mocks}}
                     <tr data-toggle="collapse" role="button" href="#table-mocks__{{@index}}"  aria-controls="table-mocks__{{@index}}" aria-expanded="false">
-                        <td>{{this.name}}</td>
-                        <td>{{this.method}}</td>
+                        <td>{{this.url}}</td>
                         <td>{{this.type}}</td>
-                        <td class="center">{{this.time}}</td>
+                        <td>{{this.time}}</td>
+                        <td>{{this.desc}}</td>
                     </tr>
                     <tr class="collapse" id="table-mocks__{{@index}}">
                         <td colspan="4">

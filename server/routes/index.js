@@ -1,10 +1,24 @@
 const _ = require('lodash');
-const models = require('../models');
+const { appMock, appProject } = require('../models');
 const express = require('express');
 const router = express.Router();
 
+const getRawMocks = mocks => {
+  return _.map(mocks, items => {
+    for (const prop in items) {
+      if (prop === 'mockVo') {
+        items[prop] = _.trim(
+          JSON.stringify(JSON.parse(items[prop]), null, '\t'),
+        );
+        break;
+      }
+    }
+    return items;
+  });
+};
+
 router.get('/', async (req, res) => {
-  const projects = await models.appProject.findAll({
+  const projects = await appProject.findAll({
     attributes: ['id', 'name', 'desc'],
     raw: true,
   });
@@ -14,10 +28,15 @@ router.get('/', async (req, res) => {
 });
 
 // mock列表页面
-router.get('/mock/list/:id', function(req, res) {
-  console.log(req.params);
+router.get('/mock/list/:id', async (req, res) => {
+  const appProjectId = req.params.id;
+  const mocks = await appMock.findAll({
+    where: { appProjectId },
+    raw: true,
+  });
   res.render('list', {
-    projectId: req.params.id,
+    projectId: appProjectId,
+    mocks: getRawMocks(mocks),
   });
 });
 
