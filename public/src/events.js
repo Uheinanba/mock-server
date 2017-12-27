@@ -10,6 +10,8 @@ export default class Events {
     this.$tabContent = $('.j-create__tab-content');
     store.trigger('setting-change', [this.getSettingVals()]);
 
+    this.$mockNav = $('.j-mock__nav');
+
     $('#newProjectModal').on('hidden.bs.modal', function() {
       $(this)
         .find('form')
@@ -71,17 +73,16 @@ export default class Events {
   }
 
   _handleSubmitMockData(mockVo) {
-    $.ajax({
+    let values = _.pick(this.settingVals, ['url', 'type', 'desc', 'time']);
+    !/^\/.*/.test(values.url) && (values.url = `/${values.url}`);
+
+    fetch({
       url: '/__api/createMock',
-      type: 'POST',
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      data: JSON.stringify(
-        _.extend(
-          { mockVo },
-          _.pick(this.settingVals, ['name', 'type', 'method', 'desc', 'time']),
-        ),
+      data: _.extend(
+        { mockVo, appProjectId: this.$mockNav.attr('data-projectId') },
+        values,
       ),
+      successMsg: '提交成功',
     });
   }
   _handleSettingChange() {

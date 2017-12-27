@@ -8,11 +8,13 @@ export default class {
     this.ctx = ctx;
     this.initData();
     this.initAceEditor();
+    this.$wellContent.removeClass('hide');
     this.listenSettingChange();
     // this.editor.getSession().on('change', function() {});
   }
 
   initData() {
+    this.$wellContent = $('.j-create__well-content');
     this.editor = this.ctx.editor;
     this.$tabContent = $('.j-create__tab-content');
     this.validSettings = {}; //  保存正确的数据

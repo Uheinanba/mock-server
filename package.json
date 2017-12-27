@@ -13,6 +13,7 @@
     "express": "~4.15.5",
     "express-validator": "^4.3.0",
     "hbs": "~4.0.1",
+    "is-json": "^2.0.1",
     "lodash": "^4.17.4",
     "metismenu": "^2.7.1",
     "mockjs": "^1.0.1-beta3",

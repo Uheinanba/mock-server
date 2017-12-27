@@ -1,7 +1,7 @@
 <div class="container app-home">
   <div class="row">
     {{#each projects}}
-      <a class="col-md-4 app-home-nav" href="/mock/list">
+      <a class="col-md-4 app-home-nav" href="/mock/list/{{this.id}}">
           <div class="em-project__item">
             <div>{{this.name}}</div>
             <div class="project-description">

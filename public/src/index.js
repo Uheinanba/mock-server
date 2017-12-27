@@ -1,6 +1,6 @@
 import bootstrap from './core/init';
 import './style/index.less';
-import Mocks from './mocks';
+import Create from './create';
 import Events from './events';
 
 toastr.options = {
@@ -14,17 +14,17 @@ class Index {
     bootstrap();
     this.$el = $('#app');
     this.initData();
-    this.mocks = new Mocks(this);
+    this.create = new Create(this);
     this.bindEvents();
 
-    $('.j-create').on('click', () => {
+    /* $('.j-create').on('click', () => {
       $.ajax({
         url: '/api/ceshi?demo=3234',
         type: 'GET',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
       });
-    });
+    }); */
   }
 
   initData() {

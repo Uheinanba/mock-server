@@ -19,7 +19,26 @@
 		age tinyint unsigned not null,
 		tel char(13) null default "-"
 	);
-4. todo:
+4. (express-validator 添加 customSanitizer)[https://github.com/tranvansang/express-validator]
+
+```
+router.get('/:number',
+  check('number').toInt()
+  .customSanitizer((value, mul, add, {path, location, req}) => value * mul + add), mul, add),
+  nextHandler)
+```
+
+
+also implementing async sanitizer to make something like
+```
+router.get('/user/:user',
+  check('user')
+  .customSanitizer(user => new Promise((resolve, reject) => User.findById(user, (err, user) =>
+    err ? reject(err) : resolve(user)
+  ))), handler)
+```
+
+5. todo:
  (1) express 插件使用
  (2) sequelizejs 使用
  (3) 如何通过饿了么 Node.js 面试

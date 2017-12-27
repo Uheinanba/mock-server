@@ -1,6 +1,5 @@
 export const SETTING_FILEDS = [
-  'name',
-  'method',
+  'url',
   'type',
   'time',
   'desc',

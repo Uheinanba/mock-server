@@ -3,16 +3,33 @@ const models = require('../models');
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  models.appProject
-    .findAll({
-      attributes: ['name', 'desc'],
-      raw: true,
-    })
-    .then(projects => {
-      res.render('index', {
-        projects,
-        /* mocks: _.map(mocks, items => {
+router.get('/', async (req, res) => {
+  const projects = await models.appProject.findAll({
+    attributes: ['id', 'name', 'desc'],
+    raw: true,
+  });
+  res.render('index', {
+    projects,
+  });
+});
+
+// mock列表页面
+router.get('/mock/list/:id', function(req, res) {
+  console.log(req.params);
+  res.render('list', {
+    projectId: req.params.id,
+  });
+});
+
+router.get('/mock/create/:id', function(req, res) {
+  res.render('create', {
+    projectId: req.params.id,
+  });
+});
+
+module.exports = router;
+
+/* mocks: _.map(mocks, items => {
         for (const prop in items) {
           if (prop === 'mockVo') {
             items[prop] = _.trim(
@@ -23,13 +40,3 @@ router.get('/', (req, res) => {
         }
         return items;
       }), */
-      });
-    });
-});
-
-// 新建页面
-router.get('/mock/list', function(req, res) {
-  res.render('list');
-});
-
-module.exports = router;

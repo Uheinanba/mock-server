@@ -1,6 +1,7 @@
+{{> nav}}
 <div class="editor-wrap">
   <div id="ace-editor"></div>
-  <div class="well well-lg m-create__well">
+  <div class="well well-lg m-create__well j-create__well-content hide">
     <ul class="nav nav-tabs nav-justified j-create__nav-tabs">
       <li role="presentation" class="active"><a href="#basicCreateSetting">基本设置</a></li>
       <li role="presentation"><a href="#otherCreateSetting">其他设置</a></li>
@@ -8,22 +9,22 @@
     <div class="tab-content j-create__tab-content">
       <form id="basicCreateSetting" class="tab-pane active" role="tabpanel">
         <div class="form-group">
-          <label>接口名</label>
-          <input type="text" name="name" class="form-control" placeholder="请输入接口全路径"/>
+            <label>Url</label>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">/</span>
+            <input type="text" name="url" class="form-control" placeholder="请输入接口全路径"/>
+          </div>
         </div>
         <div class="form-group">
-          <label>method</label>
-          <select class="form-control" name="method">
-            <option>get</option>
-            <option>post</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>type</label>
+          <label>Type</label>
           <select class="form-control" name="type">
             <option>fcp</option>
             <option>http</option>
           </select>
+        </div>
+        <div class="form-group">
+          <label>接口耗时</label>
+          <input type="text" name="time" class="form-control" value="200"/>
         </div>
         <div class="form-group">
           <label>描述</label>
@@ -39,10 +40,6 @@
         <div class="form-group">
           <label>错误信息</label>
           <input type="text" name="errMsg" class="form-control" value="成功"/>
-        </div>
-        <div class="form-group">
-          <label>接口耗时</label>
-          <input type="text" name="time" class="form-control" value="200"/>
         </div>
         <div class="form-group">
           <label>错误码Key值</label>
@@ -64,7 +61,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="modal fade" id="previeMockModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
