@@ -2,6 +2,7 @@ import bootstrap from './core/init';
 import './style/index.less';
 import Create from './create';
 import Events from './events';
+import './libs/autoresize';
 
 toastr.options = {
   closeButton: true,
@@ -17,7 +18,7 @@ class Index {
     this.create = new Create(this);
     this.bindEvents();
 
-    /* $('.j-create').on('click', () => {
+    /* $('.j-demo').on('click', () => {
       $.ajax({
         url: '/api/ceshi?demo=3234',
         type: 'GET',
@@ -25,9 +26,11 @@ class Index {
         dataType: 'json',
       });
     }); */
+    this.$resizeTextarea.val(_.trim(this.$resizeTextarea.val())).autoResize();
   }
 
   initData() {
+    this.$resizeTextarea = $('.j-textarea__autoresize');
     this.editor = window.ace && window.ace.edit('ace-editor');
   }
 

@@ -10,18 +10,21 @@ export default class Events {
     this.$tabContent = $('.j-create__tab-content');
     store.trigger('setting-change', [this.getSettingVals()]);
 
-    this.$mockNav = $('.j-mock__nav');
-
     $('#newProjectModal').on('hidden.bs.modal', function() {
       $(this)
         .find('form')
         .get(0)
         .reset();
     });
+
     return this.bindEvents();
   }
   bindEvents() {
-    _.extend({}, this.bindCreatePageEvents(), this.bindIndexPageEvents());
+    return _.extend(
+      {},
+      this.bindCreatePageEvents(),
+      this.bindIndexPageEvents(),
+    );
   }
 
   bindCreatePageEvents() {
@@ -82,14 +85,13 @@ export default class Events {
   _handleSubmitMockData(mockVo) {
     let values = _.pick(this.settingVals, ['url', 'type', 'desc', 'time']);
     !/^\/.*/.test(values.url) && (values.url = `/${values.url}`);
-
+    const appProjectId = $('.j-project-id').attr('data-projectId');
     fetch({
       url: '/__api/createMock',
-      data: _.extend(
-        { mockVo, appProjectId: this.$mockNav.attr('data-projectId') },
-        values,
-      ),
+      data: _.extend({ mockVo, appProjectId }, values),
       successMsg: '提交成功',
+    }).done(() => {
+      location.href = `/mock/list/${appProjectId}`;
     });
   }
   _handleSettingChange() {
