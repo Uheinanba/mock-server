@@ -23,7 +23,7 @@ class Index {
         headers: {
           pid: 1,
         },
-        url: '/demoss',
+        url: '/demo',
         type: 'GET',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',

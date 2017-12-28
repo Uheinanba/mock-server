@@ -30,25 +30,35 @@
         >
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Url</th>
-                    <th>Type</th>
-                    <th>耗时</th>
-                    <th>描述</th>
+                    <th class="center">Url</th>
+                    <th class="center">Type</th>
+                    <th class="center">耗时</th>
+                    <th class="center">描述</th>
+                    <th class="center">操作</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each mocks}}
                     <tr data-toggle="collapse"
                         role="button"
+                        class="center"
                         href="#table-mock__{{@index}}"
                         aria-controls="table-mock__{{@index}}"
                         aria-expanded="false">
-                        <td>{{this.id}}</td>
-                        <td>{{this.url}}</td>
-                        <td>{{this.type}}</td>
-                        <td>{{this.time}}</td>
-                        <td>{{this.desc}}</td>
+                        <td class="center">{{this.url}}</td>
+                        <td class="center">{{this.type}}</td>
+                        <td class="center">{{this.time}}</td>
+                        <td class="center">{{this.desc}}</td>
+                        <td class="center" style="width:180px;">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default j-mock_list-del" data-mockId="{{this.id}}">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                     <tr class="collapse" id="table-mock__{{@index}}">
                         <td colspan="5">
@@ -64,11 +74,11 @@
             </tbody>
         </table>
         <div class="row">
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6">
                 <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">
                     Showing 1 to 10 of 57 entries
                 </div>
-            </div>
+            </div> -->
             <div class="col-sm-6">
                 <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
                     <ul class="pagination">

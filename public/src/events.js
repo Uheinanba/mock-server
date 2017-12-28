@@ -103,6 +103,20 @@ export default class Events {
           successMsg: '更新成功',
         });
       },
+      ['.j-mock_list-del, click'](e) {
+        e.stopPropagation();
+        const $el = $(this);
+        const mockId = $el.attr('data-mockId');
+        fetch({
+          url: '/__api/delMock',
+          data: {
+            mockId,
+          },
+          successMsg: '删除成功',
+        }).done(() => {
+          $el.parents('tr').remove();
+        });
+      },
     };
   }
 

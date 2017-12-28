@@ -76,6 +76,20 @@ router.post('/createMock', checkPostMockData, async (req, res) => {
   }
 });
 
+router.post('/delMock', async (req, res) => {
+  const body = req.body;
+  try {
+    const result = await appMock.destroy({
+      where: {
+        id: body.mockId,
+      },
+    });
+    result ? res.json(SUCCESS_JSON) : res.json(FAIL_JSON);
+  } catch (error) {
+    res.json(ERRORS['db']);
+  }
+});
+
 router.post('/updateMock', async (req, res) => {
   const body = req.body;
   try {
