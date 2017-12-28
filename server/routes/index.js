@@ -1,21 +1,8 @@
 const _ = require('lodash');
 const { appMock, appProject } = require('../models');
+const { getRawMocks } = require('../libs/help');
 const express = require('express');
 const router = express.Router();
-
-const getRawMocks = mocks => {
-  return _.map(mocks, items => {
-    for (const prop in items) {
-      if (prop === 'mockVo') {
-        items[prop] = _.trim(
-          JSON.stringify(JSON.parse(items[prop]), null, '\t'),
-        );
-        break;
-      }
-    }
-    return items;
-  });
-};
 
 router.get('/', async (req, res) => {
   const projects = await appProject.findAll({

@@ -136,6 +136,24 @@ export default class Events {
         $updateModel.attr('data-mockId', mockId);
       },
 
+      ['.j-mock_list-search, click'](e) {
+        const val = $(this)
+          .parent()
+          .prev()
+          .val();
+        const appProjectId = $('.j-project-id').attr('data-projectId');
+
+        if (val) {
+          fetch({
+            url: '/__api/findMockByUrl',
+            data: {
+              appProjectId,
+              url: 'mock',
+            },
+          });
+        }
+      },
+
       // 更新
       ['.j-btn__update-mock, click'](e) {
         const $updateModel = $('.j-update__mock-modal');
