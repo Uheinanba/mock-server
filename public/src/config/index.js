@@ -9,6 +9,8 @@ export const SETTING_FILEDS = [
   'errMsgKey',
 ];
 
+export const UPDATE_MOCK_FILEDS = ['url', 'type', 'time', 'desc'];
+
 export const SETTING_FCP_TYPE = {
   Result: {
     FailureCode: 0,

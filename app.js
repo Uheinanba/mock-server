@@ -42,7 +42,9 @@ app.use(async (req, res, next) => {
       });
       if (mocks) {
         const resData = JSON.parse(mocks.mockVo);
-        return res.json(resData);
+        return setTimeout(() => {
+          res.json(resData);
+        }, resData.timer);
       } else {
         return res.json(ERRORS['none']);
       }

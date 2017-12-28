@@ -1,6 +1,6 @@
 import store from './core/store';
-import { SETTING_FILEDS } from './config';
-import { getValsByNames } from './core/utils';
+import { SETTING_FILEDS, UPDATE_MOCK_FILEDS } from './config';
+import { getValsByNames, setValsByNames } from './core/utils';
 import { fixAceEditorVal } from './core/help';
 import fetch from './core/fetch';
 
@@ -85,6 +85,11 @@ export default class Events {
 
   bindListPageEvents() {
     return {
+      ['.j-textarea__autoresize, input']() {
+        $(this)
+          .prev()
+          .removeClass('hide');
+      },
       ['.j-list__mock-update, click']() {
         const mockId = $(this).attr('data-mockId');
         const $textArea = $(this).next();
@@ -103,7 +108,7 @@ export default class Events {
           successMsg: '更新成功',
         });
       },
-      ['.j-mock_list-del, click'](e) {
+      ['.j-btn-mock_list-del, click'](e) {
         e.stopPropagation();
         const $el = $(this);
         const mockId = $el.attr('data-mockId');
@@ -117,6 +122,22 @@ export default class Events {
           $el.parents('tr').remove();
         });
       },
+
+      ['.j-btn-mock_list-update, click'](e) {
+        e.stopPropagation();
+        const $el = $(this);
+        const $tr = $el.parents('tr');
+        const $updateModel = $('.j-update__mock-modal');
+        const mockId = $el.attr('data-mockId');
+        const values = getValsByNames($tr, UPDATE_MOCK_FILEDS);
+
+        setValsByNames($updateModel, UPDATE_MOCK_FILEDS, values);
+        $updateModel.modal('show');
+        $updateModel.attr('data-mockId', mockId);
+      },
+
+      // TODO 更新
+      ['.j-btn__update-mock, click'](e) {},
     };
   }
 

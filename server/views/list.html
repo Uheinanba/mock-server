@@ -45,24 +45,24 @@
                         href="#table-mock__{{@index}}"
                         aria-controls="table-mock__{{@index}}"
                         aria-expanded="false">
-                        <td class="center">{{this.url}}</td>
-                        <td class="center">{{this.type}}</td>
-                        <td class="center">{{this.time}}</td>
-                        <td class="center">{{this.desc}}</td>
+                        <td class="center" name="url">{{this.url}}</td>
+                        <td class="center" name="type">{{this.type}}</td>
+                        <td class="center" name="time">{{this.time}}</td>
+                        <td class="center" name="desc">{{this.desc}}</td>
                         <td class="center" style="width:180px;">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default j-mock_list-del" data-mockId="{{this.id}}">
+                                <button type="button" class="btn btn-default j-btn-mock_list-del" data-mockId="{{this.id}}">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
-                                <button type="button" class="btn btn-default">
-                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                <button type="button" class="btn btn-default j-btn-mock_list-update" data-mockId="{{this.id}}">
+                                    <i class="glyphicon glyphicon-pencil"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
                     <tr class="collapse" id="table-mock__{{@index}}">
                         <td colspan="5">
-                            <div class="m-list__modify j-list__mock-update" data-mockId="{{this.id}}">
+                            <div class="m-list__modify j-list__mock-update hide" data-mockId="{{this.id}}">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </div>
                             <textarea class="form-control j-textarea__autoresize">
@@ -93,6 +93,41 @@
                         <li class="paginate_button " tabindex="0"><a href="#">6</a></li>
                         <li class="paginate_button next" tabindex="0" id="dataTables-example_next"><a href="#">Next</a></li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- modal -->
+    <div class="modal fade j-update__mock-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">更新数据</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                        <label>url</label>
+                        <input type="text" name="url" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                        <label>type</label>
+                        <input type="text" name="type" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                        <label>耗时</label>
+                        <input type="text" name="time" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                        <label>描述</label>
+                        <input type="text" name="desc" class="form-control"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="j-btn__update-mock btn btn-primary">确定</button>
                 </div>
             </div>
         </div>
