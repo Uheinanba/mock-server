@@ -136,8 +136,20 @@ export default class Events {
         $updateModel.attr('data-mockId', mockId);
       },
 
-      // TODO 更新
-      ['.j-btn__update-mock, click'](e) {},
+      // 更新
+      ['.j-btn__update-mock, click'](e) {
+        const $updateModel = $('.j-update__mock-modal');
+        const mockId = $updateModel.attr('data-mockId');
+        const values = getValsByNames($updateModel, UPDATE_MOCK_FILEDS);
+        fetch({
+          url: '/__api/updateMock',
+          data: _.extend({ mockId }, values),
+          successMsg: '更新成功',
+        }).then(() => {
+          console.log(values);
+          setValsByNames($('.j-mock__list-table'), UPDATE_MOCK_FILEDS, values);
+        });
+      },
     };
   }
 
@@ -149,7 +161,7 @@ export default class Events {
       url: '/__api/createMock',
       data: _.extend({ mockVo, appProjectId }, values),
       successMsg: '提交成功',
-    }).done(() => {
+    }).then(() => {
       location.href = `/mock/list/${appProjectId}`;
     });
   }

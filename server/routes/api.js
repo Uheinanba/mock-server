@@ -92,15 +92,13 @@ router.post('/delMock', async (req, res) => {
 
 router.post('/updateMock', async (req, res) => {
   const body = req.body;
+  const postData = _.omit(body, ['mockId']);
   try {
-    const result = await appMock.update(
-      { mockVo: body.mockVo },
-      {
-        where: {
-          id: body.mockId,
-        },
+    const result = await appMock.update(postData, {
+      where: {
+        id: body.mockId,
       },
-    );
+    });
     result ? res.json(SUCCESS_JSON) : res.json(FAIL_JSON);
   } catch (error) {
     res.json(ERRORS['db']);
