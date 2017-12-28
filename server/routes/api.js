@@ -76,11 +76,31 @@ router.post('/createMock', checkPostMockData, async (req, res) => {
   }
 });
 
-router.post('/createProject', checkProjectData, (req, res) => {
+router.post('/updateMock', async (req, res) => {
   const body = req.body;
-  appProject.create(body).then(() => {
+  try {
+    const result = await appMock.update(
+      { mockVo: body.mockVo },
+      {
+        where: {
+          id: body.mockId,
+        },
+      },
+    );
+    result ? res.json(SUCCESS_JSON) : res.json(FAIL_JSON);
+  } catch (error) {
+    res.json(ERRORS['db']);
+  }
+});
+
+router.post('/createProject', checkProjectData, async (req, res) => {
+  const body = req.body;
+  try {
+    await appProject.create(body);
     res.json(SUCCESS_JSON);
-  });
+  } catch (e) {
+    res.json(ERRORS['db']);
+  }
 });
 
 module.exports = router;

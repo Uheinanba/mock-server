@@ -24,6 +24,7 @@ export default class Events {
       {},
       this.bindCreatePageEvents(),
       this.bindIndexPageEvents(),
+      this.bindListPageEvents(),
     );
   }
 
@@ -77,6 +78,29 @@ export default class Events {
           url: '/__api/createProject',
           data: { name, desc },
           successMsg: '添加成功',
+        });
+      },
+    };
+  }
+
+  bindListPageEvents() {
+    return {
+      ['.j-list__mock-update, click']() {
+        const mockId = $(this).attr('data-mockId');
+        const $textArea = $(this).next();
+        const mockVo = $textArea.val().replace(/\s/g, '');
+        try {
+          JSON.parse(mockVo);
+        } catch (e) {
+          return toastr.error('不是有效的JSON格式', '更新失败');
+        }
+        fetch({
+          url: '/__api/updateMock',
+          data: {
+            mockVo: fixAceEditorVal(mockVo),
+            mockId,
+          },
+          successMsg: '更新成功',
         });
       },
     };

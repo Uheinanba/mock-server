@@ -6,7 +6,9 @@
                 <div class="input-group op-search">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-default j-demo" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
                     </span>
                 </div>
             </div>
@@ -21,25 +23,38 @@
                 </a>
             </div>
         </div>
-        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <table 
+            width="100%"
+            id="dataTables-example"
+            class="table posr table-striped table-bordered table-hover"
+        >
             <thead>
                 <tr>
-                    <th>url</th>
-                    <th>type</th>
+                    <th>Id</th>
+                    <th>Url</th>
+                    <th>Type</th>
                     <th>耗时</th>
                     <th>描述</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each mocks}}
-                    <tr data-toggle="collapse" role="button" href="#table-mock__{{@index}}"  aria-controls="table-mock__{{@index}}" aria-expanded="false">
+                    <tr data-toggle="collapse"
+                        role="button"
+                        href="#table-mock__{{@index}}"
+                        aria-controls="table-mock__{{@index}}"
+                        aria-expanded="false">
+                        <td>{{this.id}}</td>
                         <td>{{this.url}}</td>
                         <td>{{this.type}}</td>
                         <td>{{this.time}}</td>
                         <td>{{this.desc}}</td>
                     </tr>
                     <tr class="collapse" id="table-mock__{{@index}}">
-                        <td colspan="4">
+                        <td colspan="5">
+                            <div class="m-list__modify j-list__mock-update" data-mockId="{{this.id}}">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </div>
                             <textarea class="form-control j-textarea__autoresize">
                                 {{this.mockVo}}
                             </textarea>

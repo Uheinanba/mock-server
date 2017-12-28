@@ -18,15 +18,22 @@ class Index {
     this.create = new Create(this);
     this.bindEvents();
 
-    /* $('.j-demo').on('click', () => {
+    $('.j-demo').on('click', () => {
       $.ajax({
-        url: '/api/ceshi?demo=3234',
+        headers: {
+          pid: 1,
+        },
+        url: '/ceshi',
         type: 'GET',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
       });
-    }); */
-    this.$resizeTextarea.val(_.trim(this.$resizeTextarea.val())).autoResize();
+    });
+    this.$resizeTextarea.each(function() {
+      $(this)
+        .val(_.trim($(this).val()))
+        .autoResize();
+    });
   }
 
   initData() {

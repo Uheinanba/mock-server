@@ -7,11 +7,10 @@ const hbs = require('hbs');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const models = require('./server/models');
-
+const { ERRORS, FAIL_JSON } = require('./server/config/const');
+const { appMock } = require('./server/models');
 const index = require('./server/routes/index');
 const api = require('./server/routes/api');
-// const users = require('./server/routes/users');
 
 const app = express();
 
@@ -33,31 +32,32 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/__api', api);
 
-app.use(function(req, res, next) {
-  /* models.app_mock.findAll(
-    { 
-      where: {name: req.path},
-      raw: true 
+app.use(async (req, res, next) => {
+  const pid = req.headers.pid;
+  if (pid != null) {
+    try {
+      const mocks = await appMock.findOne({
+        where: { url: req.path, appProjectId: pid },
+        raw: true,
+      });
+      const resData = JSON.parse(mocks.mockVo);
+      return res.json(resData);
+    } catch (e) {
+      return res.json(ERRORS['db']);
     }
-  ) */
-  if (req.path === '/api/ceshi') {
-    models.app_mock.findAll({
-      where: { name: req.path },
-      raw: true,
-    });
   }
   next();
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
