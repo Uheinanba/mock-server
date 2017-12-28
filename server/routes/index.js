@@ -47,15 +47,3 @@ router.get('/mock/create/:id', function(req, res) {
 });
 
 module.exports = router;
-
-/* mocks: _.map(mocks, items => {
-        for (const prop in items) {
-          if (prop === 'mockVo') {
-            items[prop] = _.trim(
-              JSON.stringify(JSON.parse(items[prop]), null, '\t'),
-            );
-            break;
-          }
-        }
-        return items;
-      }), */

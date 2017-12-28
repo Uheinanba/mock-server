@@ -40,8 +40,12 @@ app.use(async (req, res, next) => {
         where: { url: req.path, appProjectId: pid },
         raw: true,
       });
-      const resData = JSON.parse(mocks.mockVo);
-      return res.json(resData);
+      if (mocks) {
+        const resData = JSON.parse(mocks.mockVo);
+        return res.json(resData);
+      } else {
+        return res.json(ERRORS['none']);
+      }
     } catch (e) {
       return res.json(ERRORS['db']);
     }

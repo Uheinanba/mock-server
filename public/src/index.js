@@ -23,7 +23,7 @@ class Index {
         headers: {
           pid: 1,
         },
-        url: '/ceshi',
+        url: '/demoss',
         type: 'GET',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',

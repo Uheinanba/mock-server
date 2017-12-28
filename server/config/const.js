@@ -26,4 +26,9 @@ exports.ERRORS = {
     errMsg: '值要唯一',
     data: null,
   },
+  none: {
+    errCode: -204,
+    errMsg: '没有找到数据',
+    data: null,
+  },
 };
