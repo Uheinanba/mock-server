@@ -43,16 +43,4 @@ class Index {
 
 $(function() {
   new Index();
-
-  $('.j-test___timer').on('click', () => {
-    $.ajax({
-      headers: {
-        pid: 1,
-      },
-      url: '/t3',
-      type: 'GET',
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-    });
-  });
 });

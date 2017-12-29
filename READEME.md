@@ -23,7 +23,8 @@
 		age tinyint unsigned not null,
 		tel char(13) null default "-"
 	);
-4. (express-validator 添加 customSanitizer)[https://github.com/tranvansang/express-validator]
+  
+4. [express-validator](https://github.com/tranvansang/express-validator) 添加 customSanitizer
 
 ```
 router.get('/:number',

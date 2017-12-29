@@ -1,6 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const appProject = sequelize.define('appProject', {
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
     desc: DataTypes.STRING,
   });
   appProject.associate = models => {

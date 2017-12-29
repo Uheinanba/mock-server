@@ -74,10 +74,18 @@ export default class Events {
           'name',
           'desc',
         ]);
+        if (_.isEmpty(name) || _.isEmpty(desc))
+          return toastr.info('请输入项目名称和描述', '警告', {
+            timeOut: '1500',
+            progressBar: false,
+            positionClass: 'toast-top-center',
+          });
         fetch({
           url: '/__api/createProject',
           data: { name, desc },
           successMsg: '添加成功',
+        }).then(() => {
+          location.reload();
         });
       },
     };
@@ -180,6 +188,7 @@ export default class Events {
       location.href = `/mock/list/${appProjectId}`;
     });
   }
+
   _handleSettingChange() {
     store.trigger('setting-change', [this.getSettingVals()]);
   }

@@ -2,7 +2,7 @@ const _ = require('lodash');
 const Mock = require('mockjs');
 const express = require('express');
 const isJSON = require('is-json');
-const { getRawMocks } = require('../libs/help');
+const { getRawMocks, isValidParams } = require('../libs/help');
 const { check, validationResult } = require('../libs/express-validator/check');
 const {
   sanitize,
@@ -18,6 +18,7 @@ const router = express.Router();
 
 const checkPostMockData = [
   check('type').isIn(['fcp', 'http']),
+  check('desc').exists(),
   check('appProjectId')
     .isLength({ min: 1 })
     .toInt(),
@@ -40,16 +41,7 @@ const checkProjectData = [
 router.post('/createMock', checkPostMockData, async (req, res) => {
   const body = req.body;
   // 校验参数
-  try {
-    validationResult(req).throw();
-  } catch (err) {
-    const errorObj = _.first(_.values(err.mapped()));
-    return res.json(
-      _.extend({}, ERRORS['invalid'], {
-        errMsg: `${errorObj.msg}:${errorObj.param}`,
-      }),
-    );
-  }
+  if (!isValidParams(req, res)) return;
   const postData = matchedData(req);
 
   // 查询是否有重复数据(保证同一project下的Url唯一)
@@ -108,6 +100,7 @@ router.post('/updateMock', async (req, res) => {
 
 router.post('/createProject', checkProjectData, async (req, res) => {
   const body = req.body;
+  if (!isValidParams(req, res)) return;
   try {
     await appProject.create(body);
     res.json(SUCCESS_JSON);
