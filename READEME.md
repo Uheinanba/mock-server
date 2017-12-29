@@ -5,6 +5,10 @@
 
 3. orm: [sequelizejs](https://segmentfault.com/a/1190000003987871)
 
+### mockjs 文档
+
+  http://mockjs.com/examples.html
+
 ### 返回状态码约定:
  * errCode: 错误码
  * errMsg: 错误信息

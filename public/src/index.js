@@ -43,17 +43,16 @@ class Index {
 
 $(function() {
   new Index();
-});
 
-// just test
-/* $('.j-demo').on('click', () => {
-  $.ajax({
-    headers: {
-      pid: 1,
-    },
-    url: '/demo',
-    type: 'GET',
-    contentType: 'application/json; charset=utf-8',
-    dataType: 'json',
+  $('.j-test___timer').on('click', () => {
+    $.ajax({
+      headers: {
+        pid: 1,
+      },
+      url: '/t3',
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+    });
   });
-}); */
+});

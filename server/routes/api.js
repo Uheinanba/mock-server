@@ -29,7 +29,7 @@ const checkPostMockData = [
     .toInt(),
   check('mockVo')
     .custom(isJSON)
-    .customSanitizer(v => JSON.stringify(v)),
+    .customSanitizer(v => JSON.stringify(Mock.mock(v))),
 ];
 
 const checkProjectData = [

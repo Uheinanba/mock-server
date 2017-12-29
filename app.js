@@ -44,7 +44,7 @@ app.use(async (req, res, next) => {
         const resData = JSON.parse(mocks.mockVo);
         return setTimeout(() => {
           res.json(resData);
-        }, resData.timer);
+        }, mocks.time);
       } else {
         return res.json(ERRORS['none']);
       }

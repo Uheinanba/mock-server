@@ -90,6 +90,8 @@ export default class Events {
           .prev()
           .removeClass('hide');
       },
+
+      // 更新mockVo数据
       ['.j-list__mock-update, click']() {
         let mockVo;
         const mockId = $(this).attr('data-mockId');
@@ -109,6 +111,8 @@ export default class Events {
           successMsg: '更新成功',
         });
       },
+
+      // 删除
       ['.j-btn-mock_list-del, click'](e) {
         e.stopPropagation();
         const $el = $(this);
@@ -119,11 +123,12 @@ export default class Events {
             mockId,
           },
           successMsg: '删除成功',
-        }).done(() => {
+        }).then(() => {
           $el.parents('tr').remove();
         });
       },
 
+      // 弹窗 modal 更新
       ['.j-btn-mock_list-update, click'](e) {
         e.stopPropagation();
         const $el = $(this);
@@ -137,6 +142,7 @@ export default class Events {
         $updateModel.attr('data-mockId', mockId);
       },
 
+      // 按照url进行搜索
       ['.j-mock_list-search, click'](e) {
         const $el = $(this);
         $el.parents('form').submit();
