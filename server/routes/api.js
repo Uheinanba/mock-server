@@ -91,22 +91,6 @@ router.post('/delMock', async (req, res) => {
   }
 });
 
-// TODO form 表单的形式提交
-router.post('/findMockByUrl', async (req, res) => {
-  const body = req.body;
-  const mocks = await appMock.findAll({
-    where: {
-      appProjectId: body.appProjectId,
-      url: { $like: '%' + body.url + '%' },
-    },
-    raw: true,
-  });
-  /* res.render('list', {
-    projectId: body.appProjectId,
-    mocks: getRawMocks(mocks),
-  }); */
-});
-
 router.post('/updateMock', async (req, res) => {
   const body = req.body;
   const postData = _.omit(body, ['mockId']);

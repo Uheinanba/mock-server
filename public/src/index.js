@@ -1,3 +1,4 @@
+import { getUrlParam } from './core/help';
 import bootstrap from './core/init';
 import './style/index.less';
 import Create from './create';
@@ -28,6 +29,7 @@ class Index {
   initData() {
     this.$resizeTextarea = $('.j-textarea__autoresize');
     this.editor = window.ace && window.ace.edit('ace-editor');
+    $('.j-list__mock-search').val(getUrlParam('key'));
   }
 
   bindEvents() {

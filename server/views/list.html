@@ -3,15 +3,16 @@
     <div class="panel-body">
         <div class="row app-operate">
             <div class="col-sm-6">
-                <div class="input-group op-search">
-                    <input type="text" class="form-control" placeholder="按名称搜索" />
+                <form class="input-group op-search">
+                    <input type="text" name="key" class="form-control j-list__mock-search" placeholder="按url搜索" />
                     <span class="input-group-btn">
-                        <button class="btn btn-default j-mock_list-search"
-                                type="button">
+                        <button
+                            type="button"
+                            class="btn btn-default j-mock_list-search">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
                     </span>
-                </div>
+                </form>
             </div>
             <div class="col-sm-6 op-add">
                 <a
@@ -42,6 +43,7 @@
                     <tr data-toggle="collapse"
                         role="button"
                         class="center"
+                        data-mockId="{{this.id}}"
                         href="#table-mock__{{@index}}"
                         aria-controls="table-mock__{{@index}}"
                         aria-expanded="false">
@@ -73,29 +75,6 @@
                 {{/each}}
             </tbody>
         </table>
-        <!-- <div class="row">
-            <div class="col-sm-6">
-                <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">
-                    Showing 1 to 10 of 57 entries
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
-                    <ul class="pagination">
-                        <li class="paginate_button previous disabled" tabindex="0" id="dataTables-example_previous">
-                            <a href="#">Previous</a>
-                        </li>
-                        <li class="paginate_button active" tabindex="0"><a href="#">1</a></li>
-                        <li class="paginate_button " tabindex="0"><a href="#">2</a></li>
-                        <li class="paginate_button " tabindex="0"><a href="#">3</a></li>
-                        <li class="paginate_button " tabindex="0"><a href="#">4</a></li>
-                        <li class="paginate_button " tabindex="0"><a href="#">5</a></li>
-                        <li class="paginate_button " tabindex="0"><a href="#">6</a></li>
-                        <li class="paginate_button next" tabindex="0" id="dataTables-example_next"><a href="#">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div> -->
     </div>
     
     <!-- modal -->

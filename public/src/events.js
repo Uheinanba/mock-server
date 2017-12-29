@@ -91,10 +91,11 @@ export default class Events {
           .removeClass('hide');
       },
       ['.j-list__mock-update, click']() {
+        let mockVo;
         const mockId = $(this).attr('data-mockId');
         const $textArea = $(this).next();
-        const mockVo = $textArea.val().replace(/\s/g, '');
         try {
+          mockVo = fixAceEditorVal($textArea.val().replace(/\s/g, ''));
           JSON.parse(mockVo);
         } catch (e) {
           return toastr.error('不是有效的JSON格式', '更新失败');
@@ -102,7 +103,7 @@ export default class Events {
         fetch({
           url: '/__api/updateMock',
           data: {
-            mockVo: fixAceEditorVal(mockVo),
+            mockVo: mockVo,
             mockId,
           },
           successMsg: '更新成功',
@@ -137,21 +138,8 @@ export default class Events {
       },
 
       ['.j-mock_list-search, click'](e) {
-        const val = $(this)
-          .parent()
-          .prev()
-          .val();
-        const appProjectId = $('.j-project-id').attr('data-projectId');
-
-        if (val) {
-          fetch({
-            url: '/__api/findMockByUrl',
-            data: {
-              appProjectId,
-              url: 'mock',
-            },
-          });
-        }
+        const $el = $(this);
+        $el.parents('form').submit();
       },
 
       // 更新
@@ -164,8 +152,11 @@ export default class Events {
           data: _.extend({ mockId }, values),
           successMsg: '更新成功',
         }).then(() => {
-          console.log(values);
-          setValsByNames($('.j-mock__list-table'), UPDATE_MOCK_FILEDS, values);
+          setValsByNames(
+            $('.j-mock__list-table').find(`tr[data-mockId='${mockId}']`),
+            UPDATE_MOCK_FILEDS,
+            values,
+          );
         });
       },
     };

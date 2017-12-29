@@ -17,8 +17,12 @@ router.get('/', async (req, res) => {
 // mock列表页面
 router.get('/mock/list/:id', async (req, res) => {
   const appProjectId = req.params.id;
+  const key = req.query.key;
+  const where = !key
+    ? { appProjectId }
+    : { appProjectId, url: { $like: '%' + key + '%' } };
   const mocks = await appMock.findAll({
-    where: { appProjectId },
+    where,
     raw: true,
   });
   res.render('list', {

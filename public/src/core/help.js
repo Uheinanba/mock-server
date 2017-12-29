@@ -26,3 +26,18 @@ export const setInitMockData = (isFcp, settings, editorVal) => {
   _.set(_mockData, getSetProp('data'), data);
   return _mockData;
 };
+
+/**
+ * 从Url里获取参数值
+ * @param {String} name
+ * @return {String}
+ */
+export const getUrlParam = function(name) {
+  var search = window.location.search.substr(1);
+  if (!search) return null;
+
+  //构造一个含有目标参数的正则表达式对象
+  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+  var matches = search.match(reg);
+  return matches != null ? decodeURIComponent(matches[2]) : null;
+};
