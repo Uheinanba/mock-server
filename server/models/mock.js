@@ -5,6 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     time: DataTypes.STRING,
     desc: DataTypes.STRING,
     mockVo: DataTypes.STRING,
+    indexes: [
+      {
+        method: 'BTREE',
+        fields: ['url'],
+      },
+    ],
   });
   return appMock;
 };
