@@ -7,14 +7,14 @@
       $('.j-test___timer').on('click', () => {
         $.ajax({
           headers: {
-            pid: 1,
+            pname: 'connect',
           },
-          url: '/t3',
+          url: '/demo',
           type: 'GET',
           contentType: 'application/json; charset=utf-8',
           dataType: 'json',
         });
-      }); 
+      });
     ```
   1.5: 测试预览效果
   1.6: 测试提交数据并且能够正确的在列表页面显示

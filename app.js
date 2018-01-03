@@ -4,6 +4,7 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const hbs = require('hbs');
+const { sequelize } = require('./server/models');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
@@ -34,17 +35,22 @@ app.use('/__api', api);
 
 app.use(async (req, res, next) => {
   const pid = req.headers.pid;
-  if (pid != null) {
+  const pname = req.headers.pname;
+  if (!pid || !pname) {
+    const nameSql = `select id from appProjects where name = '${pname}'`;
+    const sql = `select * from appMocks where appMocks.appProjectId = (
+        ${pid ? pid : nameSql}
+      )`;
     try {
-      const mocks = await appMock.findOne({
-        where: { url: req.path, appProjectId: pid },
-        raw: true,
+      const mocks = await sequelize.query(sql, {
+        type: sequelize.QueryTypes.SELECT,
       });
-      if (mocks) {
-        const resData = JSON.parse(mocks.mockVo);
+      const myMocks = _.first(mocks);
+      if (myMocks) {
+        const resData = JSON.parse(myMocks.mockVo);
         return setTimeout(() => {
           res.json(resData);
-        }, mocks.time);
+        }, myMocks.time);
       } else {
         return res.json(ERRORS['none']);
       }
