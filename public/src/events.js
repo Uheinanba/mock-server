@@ -70,11 +70,12 @@ export default class Events {
     return {
       // 新建类别
       ['.j-btn__new-project, click']: () => {
-        const { name, desc } = getValsByNames($('#newProjectModal'), [
+        const { name, desc, prefix } = getValsByNames($('#newProjectModal'), [
           'name',
           'desc',
+          'prefix',
         ]);
-        if (_.isEmpty(name) || _.isEmpty(desc))
+        if (_.isEmpty(name) || _.isEmpty(desc) || _.isEmpty(prefix))
           return toastr.info('请输入项目名称和描述', '警告', {
             timeOut: '1500',
             progressBar: false,
@@ -82,7 +83,7 @@ export default class Events {
           });
         fetch({
           url: '/__api/createProject',
-          data: { name, desc },
+          data: { name, desc, prefix },
           successMsg: '添加成功',
         }).then(() => {
           location.reload();
@@ -179,7 +180,7 @@ export default class Events {
   _handleSubmitMockData(mockVo) {
     let values = _.pick(this.settingVals, ['url', 'type', 'desc', 'time']);
     !/^\/.*/.test(values.url) && (values.url = `/${values.url}`);
-    const appProjectId = $('.j-project-id').attr('data-projectId');
+    const appProjectId = $('.j-create__project-data').attr('data-projectId');
     fetch({
       url: '/__api/createMock',
       data: _.extend({ mockVo, appProjectId }, values),

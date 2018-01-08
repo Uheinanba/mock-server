@@ -1,6 +1,10 @@
 <!-- {{> nav}} -->
 <div class="editor-wrap">
-  <input type="hidden" class="j-project-id" data-projectId="{{projectId}}">
+  <input
+    type="hidden"
+    class="j-create__project-data"
+    data-projectId="{{projectId}}"
+  >
   <div id="ace-editor"></div>
   <div class="well well-lg m-create__well j-create__well-content hide">
     <ul class="nav nav-tabs nav-justified j-create__nav-tabs">
@@ -13,7 +17,7 @@
             <label>Url</label>
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">/</span>
-            <input type="text" name="url" class="form-control" placeholder="请输入接口全路径"/>
+            <input type="text" name="url" value="{{prefix}}" class="form-control" placeholder="请输入接口全路径"/>
           </div>
         </div>
         <div class="form-group">

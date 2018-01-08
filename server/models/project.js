@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
     },
+    prefix: DataTypes.STRING,
     desc: DataTypes.STRING,
   });
   appProject.associate = models => {

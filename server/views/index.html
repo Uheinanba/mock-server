@@ -7,6 +7,9 @@
             <div class="project-description">
               {{this.desc}}
             </div>
+            <div class="project-description project-prefix">
+              {{this.prefix}}
+            </div>
           </div>
         </a>
     {{/each}}
@@ -28,16 +31,20 @@
             <h4 class="modal-title">新建项目</h4>
           </div>
           <div class="modal-body">
-              <form>
-                  <div class="form-group">
-                      <label><em class="form-must__flag">*</em>项目名称</label>
-                      <input type="text" name="name" class="form-control" placeholder="请输入项目名称"/>
-                  </div>
-                  <div class="form-group">
-                      <label><em class="form-must__flag">*</em>项目描述</label>
-                      <input type="text" name="desc" class="form-control" placeholder="请输入项目描述"/>
-                  </div>
-              </form>
+            <form>
+              <div class="form-group">
+                <label><em class="form-must__flag">*</em>项目名称</label>
+                <input type="text" name="name" class="form-control" placeholder="请输入项目名称"/>
+              </div>
+              <div class="form-group">
+                <label><em class="form-must__flag">*</em>项目描述</label>
+                <input type="text" name="desc" class="form-control" placeholder="请输入项目描述"/>
+              </div>
+              <div class="form-group">
+                <label><em class="form-must__flag">*</em>项目前缀</label>
+                <input type="text" name="prefix" class="form-control" placeholder="请输入Url前缀"/>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" data-dismiss="modal" class="j-btn__new-project btn btn-primary">确定</button>

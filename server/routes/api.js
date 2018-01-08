@@ -36,6 +36,7 @@ const checkPostMockData = [
 const checkProjectData = [
   check('name').isLength({ min: 1 }),
   check('desc').isLength({ min: 1 }),
+  check('prefix').isLength({ min: 1 }),
 ];
 
 router.post('/createMock', checkPostMockData, async (req, res) => {
