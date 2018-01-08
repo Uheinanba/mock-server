@@ -42,12 +42,13 @@
             <tbody>
                 {{#each mocks}}
                     <tr data-toggle="collapse"
+                        data-parent="#accordion"
                         role="button"
                         class="center j-list__tr-item"
                         data-mockId="{{this.id}}"
                         href="#table-mock__{{@index}}"
                         aria-controls="table-mock__{{@index}}"
-                        aria-expanded="false">
+                        aria-expanded="true">
                         <td class="center" name="url">{{this.url}}</td>
                         <td class="center">{{this.type}}</td>
                         <td class="center" name="method">{{this.method}}</td>

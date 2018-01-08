@@ -3,7 +3,6 @@ import bootstrap from './core/init';
 import './style/index.less';
 import Create from './create';
 import Events from './events';
-import './libs/autoresize';
 
 toastr.options = {
   closeButton: true,

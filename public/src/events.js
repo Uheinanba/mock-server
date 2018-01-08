@@ -8,6 +8,7 @@ import {
 } from './core/utils';
 import { fixAceEditorVal } from './core/help';
 import fetch from './core/fetch';
+import autoResize from './libs/autoresize';
 
 export default class Events {
   constructor(ctx) {
@@ -137,9 +138,18 @@ export default class Events {
 
   bindListPageEvents() {
     return {
-      ['.j-list__tr-item, click']() {
+      ['.j-list__tr-item, click'](e) {
+        console.log(
+          $(this)
+            .next()
+            .find('.j-textarea__autoresize'),
+        );
         setTimeout(() => {
-          $('textarea').autoResize();
+          autoResize(
+            $(this)
+              .next()
+              .find('.j-textarea__autoresize'),
+          );
         }, 0);
       },
 
