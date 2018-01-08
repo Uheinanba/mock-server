@@ -1,6 +1,11 @@
 import store from './core/store';
 import { SETTING_FILEDS, UPDATE_MOCK_FILEDS } from './config';
-import { getValsByNames, setValsByNames } from './core/utils';
+import {
+  getValsByNames,
+  setValsByNames,
+  setStore,
+  getStore,
+} from './core/utils';
 import { fixAceEditorVal } from './core/help';
 import fetch from './core/fetch';
 
@@ -231,6 +236,8 @@ export default class Events {
       'time',
       'method',
     ]);
+    values.type && setStore('type', values.type);
+
     !/^\/.*/.test(values.url) && (values.url = `/${values.url}`);
     const appProjectId = $('.j-create__project-data').attr('data-projectId');
     fetch({

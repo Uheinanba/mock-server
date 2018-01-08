@@ -1,3 +1,5 @@
+const storePrefix = 'h5-mock__';
+
 const isFormEl = ($el, attr) => {
   return (
     $el.find(`input${attr}`).length > 0 || $el.find(`select${attr}`).length > 0
@@ -25,4 +27,20 @@ export const setValsByNames = ($el, names, values) => {
     $myEl = null;
     attr = null;
   });
+};
+
+export const setStore = (k, v) => {
+  try {
+    window.localStorage.setItem(storePrefix + k, v);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getStore = k => {
+  try {
+    return window.localStorage.getItem(storePrefix + k);
+  } catch (error) {
+    console.error(error);
+  }
 };
