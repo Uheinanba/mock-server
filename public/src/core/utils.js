@@ -10,6 +10,7 @@ export const getValsByNames = ($el, names) => {
     let attr = `[name='${name}']`;
     let $myEl = $el.find(attr);
     tmp[name] = isFormEl($el, attr) ? $myEl.val() : $myEl.html();
+    tmp[name] = typeof tmp[name] === 'string' ? tmp[name].trim() : tmp[name];
     $myEl = null;
     attr = null;
   });

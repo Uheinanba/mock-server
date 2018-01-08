@@ -67,6 +67,7 @@ export default class Events {
   }
 
   bindIndexPageEvents() {
+    const me = this;
     return {
       // 新建类别
       ['.j-btn__new-project, click']: () => {
@@ -89,11 +90,54 @@ export default class Events {
           location.reload();
         });
       },
+
+      // 删除
+      ['.j-index__del-project, click'](e) {
+        e.stopPropagation();
+        e.preventDefault();
+        const $projItem = $(this).parents('.j-index__project-item');
+
+        $('.j-my-modal')
+          .data({
+            projectName: $projItem.find('.project-name').text(),
+            projectId: $projItem.attr('data-projectId'),
+          })
+          .modal('toggle');
+      },
+
+      ['.j-proj-btn__confirm-del, click'](e) {
+        const $el = $(this);
+        const $modal = $el.parents('.j-my-modal');
+        const $nameEl = $modal.find('input[name="name"]');
+        const nameVal = $nameEl.val();
+
+        if ($modal.data('projectName') !== nameVal) {
+          $nameEl.val('');
+          return toastr.error('请输入正确的项目名称', '失败');
+        }
+
+        fetch({
+          url: '/__api/delProject',
+          data: {
+            projectId: $modal.data('projectId'),
+          },
+          successMsg: '删除成功',
+        }).then(() => {
+          $('.j-index__project-item').filter((index, el) => $(el).remove());
+          $modal.modal('hide');
+        });
+      },
     };
   }
 
   bindListPageEvents() {
     return {
+      ['.j-list__tr-item, click']() {
+        setTimeout(() => {
+          $('textarea').autoResize();
+        }, 0);
+      },
+
       ['.j-textarea__autoresize, input']() {
         $(this)
           .prev()
@@ -133,7 +177,9 @@ export default class Events {
           },
           successMsg: '删除成功',
         }).then(() => {
-          $el.parents('tr').remove();
+          const $tr = $el.parents('tr');
+          $tr.next().remove();
+          $tr.remove();
         });
       },
 
@@ -178,7 +224,13 @@ export default class Events {
   }
 
   _handleSubmitMockData(mockVo) {
-    let values = _.pick(this.settingVals, ['url', 'type', 'desc', 'time']);
+    let values = _.pick(this.settingVals, [
+      'url',
+      'type',
+      'desc',
+      'time',
+      'method',
+    ]);
     !/^\/.*/.test(values.url) && (values.url = `/${values.url}`);
     const appProjectId = $('.j-create__project-data').attr('data-projectId');
     fetch({

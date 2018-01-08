@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     time: DataTypes.STRING,
     desc: DataTypes.STRING,
+    method: DataTypes.STRING,
     mockVo: DataTypes.STRING,
     indexes: [
       {

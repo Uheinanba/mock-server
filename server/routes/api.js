@@ -18,6 +18,7 @@ const router = express.Router();
 
 const checkPostMockData = [
   check('type').isIn(['fcp', 'http']),
+  check('method').isIn(['post', 'get']),
   check('desc').exists(),
   check('appProjectId')
     .isLength({ min: 1 })
@@ -108,6 +109,28 @@ router.post('/createProject', checkProjectData, async (req, res) => {
   } catch (e) {
     res.json(ERRORS['db']);
   }
+});
+
+router.post('/delProject', async (req, res) => {
+  const body = req.body;
+  try {
+    const result = await appProject.destroy({
+      where: {
+        id: body.projectId,
+      },
+    });
+    result ? res.json(SUCCESS_JSON) : res.json(FAIL_JSON);
+  } catch (error) {
+    res.json(ERRORS['db']);
+  }
+
+  /* if (!isValidParams(req, res)) return;
+  try {
+    await appProject.create(body);
+    res.json(SUCCESS_JSON);
+  } catch (e) {
+    res.json(ERRORS['db']);
+  } */
 });
 
 module.exports = router;

@@ -19,10 +19,13 @@ class Index {
     this.create = new Create(this);
     this.bindEvents();
 
-    this.$resizeTextarea.each(function() {
-      $(this)
-        .val(_.trim($(this).val()))
-        .autoResize();
+    this.$resizeTextarea.each((i, el) => {
+      const $el = $(el);
+      $el.css({
+        'min-height': '200px',
+        'max-height': '500px',
+      });
+      $el.val(_.trim($el.val()));
     });
   }
 

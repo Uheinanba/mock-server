@@ -3,6 +3,7 @@ export const SETTING_FILEDS = [
   'type',
   'time',
   'desc',
+  'method',
   'errCode',
   'errMsg',
   'errCodeKey',

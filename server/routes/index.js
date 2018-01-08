@@ -40,7 +40,7 @@ router.get('/mock/create/:id', async (req, res) => {
   const prefix = projects.prefix;
 
   const prePrefix = prefix.indexOf('/') === 0 ? prefix.slice(1) : prefix; // 处理前缀
-  const postPrefix = _.lastIndexOf('/') === 0 ? prePrefix : prePrefix + '/'; // 处理后缀
+  const postPrefix = prePrefix.slice(-1) === '/' ? prePrefix : prePrefix + '/'; // 处理后缀
 
   res.render('create', {
     projectId,
