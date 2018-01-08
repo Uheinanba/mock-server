@@ -36,7 +36,7 @@ app.use('/__api', api);
 app.use(async (req, res, next) => {
   const pid = req.headers.pid;
   const pname = req.headers.pname;
-  if (!pid || !pname) {
+  if (pid || pname) {
     const nameSql = `select id from appProjects where name = '${pname}'`;
     const sql = `select * from appMocks where appMocks.appProjectId = (
         ${pid ? pid : nameSql}
