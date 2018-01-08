@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/__api', api);
 
-app.use(async (req, res, next) => {
+app.use(async(req, res, next) => {
   const pid = req.headers.pid;
   const pname = req.headers.pname;
   if (pid || pname) {
@@ -45,12 +45,18 @@ app.use(async (req, res, next) => {
       const mocks = await sequelize.query(sql, {
         type: sequelize.QueryTypes.SELECT,
       });
-      const myMocks = _.first(mocks);
-      if (myMocks) {
-        const resData = JSON.parse(myMocks.mockVo);
+      if (_.isEmpty(mocks)) return res.json(ERRORS['none']);
+      const sampleMock = _.first(mocks);
+      const path = req.path;
+      const myMock = appMock.findOne({
+        where: { appProjectId: sampleMock.appProjectId, url: path }
+      })
+
+      if (myMock) {
+        const resData = JSON.parse(myMock.mockVo);
         return setTimeout(() => {
           res.json(resData);
-        }, myMocks.time);
+        }, myMock.time);
       } else {
         return res.json(ERRORS['none']);
       }
