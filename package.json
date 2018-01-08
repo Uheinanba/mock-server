@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "parcel watch ./public/src/index -d ./public/dist",
-    "start": "nodemon ./bin/www & npm run dev"
+    "dev": "parcel watch ./public/src/index.js -d ./public/dist",
+    "build": "parcel build ./public/src/index.js -d ./public/dist",
+    "start": "nodemon ./bin/www & npm run dev",
+    "prod": "nodemon ./bin/www & npm run build"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
