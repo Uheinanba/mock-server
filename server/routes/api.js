@@ -123,14 +123,6 @@ router.post('/delProject', async (req, res) => {
   } catch (error) {
     res.json(ERRORS['db']);
   }
-
-  /* if (!isValidParams(req, res)) return;
-  try {
-    await appProject.create(body);
-    res.json(SUCCESS_JSON);
-  } catch (e) {
-    res.json(ERRORS['db']);
-  } */
 });
 
 module.exports = router;

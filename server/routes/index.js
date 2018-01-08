@@ -23,6 +23,8 @@ router.get('/mock/list/:id', async (req, res) => {
     : { appProjectId, url: { $like: '%' + key + '%' } };
   const mocks = await appMock.findAll({
     where,
+    // 倒序
+    order: [['id', 'DESC']],
     raw: true,
   });
   res.render('list', {
