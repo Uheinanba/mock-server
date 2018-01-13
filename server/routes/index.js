@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const projects = await appProject.findAll({
-    attributes: ['id', 'name', 'desc'],
+    attributes: ['id', 'name', 'prefix', 'desc'],
     raw: true,
   });
   res.render('index', {
@@ -23,6 +23,8 @@ router.get('/mock/list/:id', async (req, res) => {
     : { appProjectId, url: { $like: '%' + key + '%' } };
   const mocks = await appMock.findAll({
     where,
+    // 倒序
+    order: [['id', 'DESC']],
     raw: true,
   });
   res.render('list', {
@@ -31,9 +33,20 @@ router.get('/mock/list/:id', async (req, res) => {
   });
 });
 
-router.get('/mock/create/:id', function(req, res) {
+router.get('/mock/create/:id', async (req, res) => {
+  const projectId = req.params.id;
+  const projects = await appProject.findOne({
+    where: { id: projectId },
+    raw: true,
+  });
+  const prefix = projects.prefix;
+
+  const prePrefix = prefix.indexOf('/') === 0 ? prefix.slice(1) : prefix; // 处理前缀
+  const postPrefix = prePrefix.slice(-1) === '/' ? prePrefix : prePrefix + '/'; // 处理后缀
+
   res.render('create', {
-    projectId: req.params.id,
+    projectId,
+    prefix: postPrefix,
   });
 });
 

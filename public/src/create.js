@@ -1,7 +1,7 @@
 import store from './core/store';
 import { setInitMockData } from './core/help';
 import { SETTING_FILEDS, SETTING_FCP_TYPE } from './config';
-import { setValsByNames } from './core/utils';
+import { setValsByNames, getStore } from './core/utils';
 
 export default class {
   constructor(ctx) {
@@ -10,6 +10,7 @@ export default class {
     this.initAceEditor();
     this.$wellContent.removeClass('hide');
     this.listenSettingChange();
+    this.initSelectType();
     // this.editor.getSession().on('change', function() {});
   }
 
@@ -18,6 +19,11 @@ export default class {
     this.editor = this.ctx.editor;
     this.$tabContent = $('.j-create__tab-content');
     this.validSettings = {}; //  保存正确的数据
+  }
+
+  initSelectType() {
+    const typeVal = getStore('type');
+    typeVal && this.$tabContent.find('select[name="type"]').val(typeVal);
   }
 
   listenSettingChange() {

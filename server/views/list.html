@@ -33,6 +33,7 @@
                 <tr>
                     <th class="center">Url</th>
                     <th class="center">Type</th>
+                    <th class="center">Method</th>
                     <th class="center">耗时</th>
                     <th class="center">描述</th>
                     <th class="center">操作</th>
@@ -41,14 +42,16 @@
             <tbody>
                 {{#each mocks}}
                     <tr data-toggle="collapse"
+                        data-parent="#accordion"
                         role="button"
-                        class="center"
+                        class="center j-list__tr-item"
                         data-mockId="{{this.id}}"
                         href="#table-mock__{{@index}}"
                         aria-controls="table-mock__{{@index}}"
-                        aria-expanded="false">
+                        aria-expanded="true">
                         <td class="center" name="url">{{this.url}}</td>
                         <td class="center">{{this.type}}</td>
+                        <td class="center" name="method">{{this.method}}</td>
                         <td class="center" name="time">{{this.time}}</td>
                         <td class="center" name="desc">{{this.desc}}</td>
                         <td class="center" style="width:180px;">
@@ -63,7 +66,7 @@
                         </td>
                     </tr>
                     <tr class="collapse" id="table-mock__{{@index}}">
-                        <td colspan="5">
+                        <td colspan="6">
                             <div class="m-list__modify j-list__mock-update hide" data-mockId="{{this.id}}">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </div>

@@ -1,8 +1,14 @@
 import store from './core/store';
 import { SETTING_FILEDS, UPDATE_MOCK_FILEDS } from './config';
-import { getValsByNames, setValsByNames } from './core/utils';
+import {
+  getValsByNames,
+  setValsByNames,
+  setStore,
+  getStore,
+} from './core/utils';
 import { fixAceEditorVal } from './core/help';
 import fetch from './core/fetch';
+import autoResize from './libs/autoresize';
 
 export default class Events {
   constructor(ctx) {
@@ -67,14 +73,16 @@ export default class Events {
   }
 
   bindIndexPageEvents() {
+    const me = this;
     return {
       // 新建类别
       ['.j-btn__new-project, click']: () => {
-        const { name, desc } = getValsByNames($('#newProjectModal'), [
+        const { name, desc, prefix } = getValsByNames($('#newProjectModal'), [
           'name',
           'desc',
+          'prefix',
         ]);
-        if (_.isEmpty(name) || _.isEmpty(desc))
+        if (_.isEmpty(name) || _.isEmpty(desc) || _.isEmpty(prefix))
           return toastr.info('请输入项目名称和描述', '警告', {
             timeOut: '1500',
             progressBar: false,
@@ -82,10 +90,47 @@ export default class Events {
           });
         fetch({
           url: '/__api/createProject',
-          data: { name, desc },
+          data: { name, desc, prefix },
           successMsg: '添加成功',
         }).then(() => {
           location.reload();
+        });
+      },
+
+      // 删除
+      ['.j-index__del-project, click'](e) {
+        e.stopPropagation();
+        e.preventDefault();
+        const $projItem = $(this).parents('.j-index__project-item');
+
+        $('.j-my-modal')
+          .data({
+            projectName: $projItem.find('.project-name').text(),
+            projectId: $projItem.attr('data-projectId'),
+          })
+          .modal('toggle');
+      },
+
+      ['.j-proj-btn__confirm-del, click'](e) {
+        const $el = $(this);
+        const $modal = $el.parents('.j-my-modal');
+        const $nameEl = $modal.find('input[name="name"]');
+        const nameVal = $nameEl.val();
+
+        if ($modal.data('projectName') !== nameVal) {
+          $nameEl.val('');
+          return toastr.error('请输入正确的项目名称', '失败');
+        }
+
+        fetch({
+          url: '/__api/delProject',
+          data: {
+            projectId: $modal.data('projectId'),
+          },
+          successMsg: '删除成功',
+        }).then(() => {
+          $('.j-index__project-item').filter((index, el) => $(el).remove());
+          $modal.modal('hide');
         });
       },
     };
@@ -93,6 +138,21 @@ export default class Events {
 
   bindListPageEvents() {
     return {
+      ['.j-list__tr-item, click'](e) {
+        console.log(
+          $(this)
+            .next()
+            .find('.j-textarea__autoresize'),
+        );
+        setTimeout(() => {
+          autoResize(
+            $(this)
+              .next()
+              .find('.j-textarea__autoresize'),
+          );
+        }, 0);
+      },
+
       ['.j-textarea__autoresize, input']() {
         $(this)
           .prev()
@@ -132,7 +192,9 @@ export default class Events {
           },
           successMsg: '删除成功',
         }).then(() => {
-          $el.parents('tr').remove();
+          const $tr = $el.parents('tr');
+          $tr.next().remove();
+          $tr.remove();
         });
       },
 
@@ -177,9 +239,17 @@ export default class Events {
   }
 
   _handleSubmitMockData(mockVo) {
-    let values = _.pick(this.settingVals, ['url', 'type', 'desc', 'time']);
+    let values = _.pick(this.settingVals, [
+      'url',
+      'type',
+      'desc',
+      'time',
+      'method',
+    ]);
+    values.type && setStore('type', values.type);
+
     !/^\/.*/.test(values.url) && (values.url = `/${values.url}`);
-    const appProjectId = $('.j-project-id').attr('data-projectId');
+    const appProjectId = $('.j-create__project-data').attr('data-projectId');
     fetch({
       url: '/__api/createMock',
       data: _.extend({ mockVo, appProjectId }, values),

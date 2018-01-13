@@ -2,10 +2,26 @@
   <div class="row">
     {{#each projects}}
       <a class="col-md-4 app-home-nav" href="/mock/list/{{this.id}}">
-          <div class="em-project__item">
-            <div>{{this.name}}</div>
-            <div class="project-description">
+          <div class="em-project__item j-index__project-item" data-projectId="{{this.id}}">
+            <div class="project-name">{{this.name}}</div>
+            <div class="project-description project-gap">
               {{this.desc}}
+            </div>
+            <div class="project-description project-prefix project-gap">
+              {{this.prefix}}
+            </div>
+            <div class="btn-group btn-group-justified project-gap" role="group">
+              <div class="btn-group" role="group">
+                <button
+                  type="button"
+                  class="btn btn-default j-index__del-project"
+                >
+                  <i class="glyphicon glyphicon-trash"></i>
+                </button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i></button>
+              </div>
             </div>
           </div>
         </a>
@@ -28,22 +44,52 @@
             <h4 class="modal-title">新建项目</h4>
           </div>
           <div class="modal-body">
-              <form>
-                  <div class="form-group">
-                      <label><em class="form-must__flag">*</em>项目名称</label>
-                      <input type="text" name="name" class="form-control" placeholder="请输入项目名称"/>
-                  </div>
-                  <div class="form-group">
-                      <label><em class="form-must__flag">*</em>项目描述</label>
-                      <input type="text" name="desc" class="form-control" placeholder="请输入项目描述"/>
-                  </div>
-              </form>
+            <form>
+              <div class="form-group">
+                <label><em class="form-must__flag">*</em>项目名称</label>
+                <input type="text" name="name" class="form-control" placeholder="请输入项目名称"/>
+              </div>
+              <div class="form-group">
+                <label><em class="form-must__flag">*</em>项目描述</label>
+                <input type="text" name="desc" class="form-control" placeholder="请输入项目描述"/>
+              </div>
+              <div class="form-group">
+                <label><em class="form-must__flag">*</em>项目前缀</label>
+                <input type="text" name="prefix" class="form-control" placeholder="请输入Url前缀"/>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" data-dismiss="modal" class="j-btn__new-project btn btn-primary">确定</button>
           </div>
         </div>
       </div>
+  </div>
+
+
+
+
+
+  <div class="modal fade j-my-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">警告</h4>
+        </div>
+        <div class="modal-body">
+          <p>此操作无法撤销,将永远删除数据。 请输入项目名称以进行确认。</p>
+          <div class="form-group">
+            <label>项目名称</label>
+            <input type="text" name="name" class="form-control" placeholder="请输入项目名称"/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary j-proj-btn__confirm-del">确定</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
   </div>
 </div>
 
